@@ -1,0 +1,170 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the nvidia-driver-manager package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nvidia-driver-manager 1.0\n"
+"Report-Msgid-Bugs-To: your@email.com\n"
+"POT-Creation-Date: 2026-08-06 20:03+0800\n"
+"PO-Revision-Date: 2026-08-06 20:11+0800\n"
+"Last-Translator: \n"
+"Language-Team: KairikiFedora Software Team <13278297951@sina.cn>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.9\n"
+
+#: main.cpp:17 mainwindow.cpp:12
+msgid "NVIDIA Driver Manager"
+msgstr "NVIDIA 驱动程序管理器"
+
+#: main.cpp:19
+msgid "Manage NVIDIA drivers on Fedora Linux"
+msgstr "在 Fedora Linux 上管理 NVIDIA 驱动程序"
+
+#: main.cpp:21
+msgid "(c) 2025 Your Name"
+msgstr "(C) 2027 KairikiFeedora"
+
+#: mainwindow.cpp:20
+msgid "Detecting GPU..."
+msgstr "正在检测 GPU..."
+
+#: mainwindow.cpp:24
+msgid "Current driver: detecting..."
+msgstr "当前驱动程序：正在检测..."
+
+#: mainwindow.cpp:28
+msgid "Select Driver Version"
+msgstr "选择驱动程序版本"
+
+#: mainwindow.cpp:38
+msgid "Install / Switch Driver"
+msgstr "安装 / 切换驱动程序"
+
+#: mainwindow.cpp:54
+msgid "NVIDIA GPU detected ✓"
+msgstr "检测到 NVIDIA GPU ✓"
+
+#: mainwindow.cpp:59
+msgid "This computer does not need additional drivers."
+msgstr "此计算机无需额外驱动程序。"
+
+#: mainwindow.cpp:67
+msgid "Current driver: not installed"
+msgstr "当前驱动程序：未安装"
+
+#: mainwindow.cpp:69
+msgid "Current driver: %1"
+msgstr "当前驱动程序：%1"
+
+#: mainwindow.cpp:95
+msgid "Authentication Required"
+msgstr "需要身份验证"
+
+#: mainwindow.cpp:96
+msgid ""
+"Administrator privileges are required to install drivers.\n"
+"Operation cancelled."
+msgstr ""
+"安装驱动程序需要管理员权限。\n"
+"操作已取消。"
+
+#: mainwindow.cpp:104
+msgid "Confirm Installation"
+msgstr "确认安装"
+
+#: mainwindow.cpp:105
+msgid ""
+"The system will install/switch to %1.\n"
+"\n"
+"This requires root privileges and may download packages. Continue?"
+msgstr ""
+"系统将安装/切换至 %1。\n"
+"\n"
+"此操作需要 root 权限，并可能下载软件包。是否继续？"
+
+#: mainwindow.cpp:115
+msgid "Success"
+msgstr "成功"
+
+#: mainwindow.cpp:116
+msgid ""
+"Driver installed successfully.\n"
+"Please reboot to apply changes."
+msgstr ""
+"驱动程序安装成功。\n"
+"请重启以应用更改。"
+
+#: mainwindow.cpp:119
+msgid "Error"
+msgstr "错误"
+
+#: mainwindow.cpp:120
+msgid ""
+"Driver installation failed.\n"
+"Check terminal output for details."
+msgstr ""
+"驱动程序安装失败。\n"
+"请查看终端输出以获取详细信息。"
+
+#: mainwindow.cpp:133
+msgid "Secure Boot Detected"
+msgstr "检测到安全启动"
+
+#: mainwindow.cpp:134
+msgid ""
+"Secure Boot is enabled on this system.\n"
+"NVIDIA drivers must be signed to load.\n"
+"\n"
+"Do you want to configure Machine Owner Key (MOK) now?"
+msgstr ""
+"此系统已启用安全启动。\n"
+"NVIDIA 驱动程序必须经过签名才能加载。\n"
+"\n"
+"是否现在配置机器所有者密钥（MOK）？"
+
+#: mainwindow.cpp:138
+msgid "Configure MOK"
+msgstr "配置 MOK"
+
+#: mainwindow.cpp:139
+msgid "Skip (Install anyway)"
+msgstr "跳过（仍安装）"
+
+#: mainwindow.cpp:149
+msgid "MOK Configuration Failed"
+msgstr "MOK 配置失败"
+
+#: mainwindow.cpp:150
+msgid ""
+"Failed to set up MOK. You can still install the driver, but it may not load "
+"with Secure Boot enabled."
+msgstr ""
+"设置 MOK 失败。您仍可安装驱动程序，但在启用安全启动的情况下可能无法加载。"
+
+#: mainwindow.cpp:155
+msgid "MOK Configured"
+msgstr "MOK 已配置"
+
+#: mainwindow.cpp:156
+msgid ""
+"The Machine Owner Key has been imported successfully.\n"
+"\n"
+"When you reboot, the MOK management interface will appear.\n"
+"Select 'Enroll MOK' -> 'Continue' -> 'Yes' and enter the password:\n"
+"    nvidia-mok\n"
+"\n"
+"After enrolling, the driver will load correctly."
+msgstr ""
+"机器所有者密钥已成功导入。\n"
+"\n"
+"重启后，将出现 MOK 管理界面。\n"
+"请选择“Enroll MOK”->“Continue”->“Yes”，然后输入密码：\n"
+"    nvidia-mok\n"
+"\n"
+"注册后，驱动程序将正常加载。"

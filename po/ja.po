@@ -1,0 +1,172 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the nvidia-driver-manager package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nvidia-driver-manager 1.0\n"
+"Report-Msgid-Bugs-To: your@email.com\n"
+"POT-Creation-Date: 2026-08-06 20:03+0800\n"
+"PO-Revision-Date: 2026-08-06 20:15+0800\n"
+"Last-Translator: \n"
+"Language-Team: KairikiFedora Software Team <13278297951@sina.cn>\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.9\n"
+
+#: main.cpp:17 mainwindow.cpp:12
+msgid "NVIDIA Driver Manager"
+msgstr "NVIDIA ドライバーマネージャー"
+
+#: main.cpp:19
+msgid "Manage NVIDIA drivers on Fedora Linux"
+msgstr "Fedora Linux で NVIDIA ドライバーを管理"
+
+#: main.cpp:21
+msgid "(c) 2025 Your Name"
+msgstr "(C) 2027 KairikiFedora"
+
+#: mainwindow.cpp:20
+msgid "Detecting GPU..."
+msgstr "GPU を検出中..."
+
+#: mainwindow.cpp:24
+msgid "Current driver: detecting..."
+msgstr "現在のドライバー: 検出中..."
+
+#: mainwindow.cpp:28
+msgid "Select Driver Version"
+msgstr "ドライバーバージョンを選択"
+
+#: mainwindow.cpp:38
+msgid "Install / Switch Driver"
+msgstr "ドライバーのインストール / 切り替え"
+
+#: mainwindow.cpp:54
+msgid "NVIDIA GPU detected ✓"
+msgstr "NVIDIA GPU が検出されました ✓"
+
+#: mainwindow.cpp:59
+msgid "This computer does not need additional drivers."
+msgstr "このコンピューターには追加のドライバーは不要です。"
+
+#: mainwindow.cpp:67
+msgid "Current driver: not installed"
+msgstr "現在のドライバー: 未インストール"
+
+#: mainwindow.cpp:69
+msgid "Current driver: %1"
+msgstr "現在のドライバー: %1"
+
+#: mainwindow.cpp:95
+msgid "Authentication Required"
+msgstr "認証が必要です"
+
+#: mainwindow.cpp:96
+msgid ""
+"Administrator privileges are required to install drivers.\n"
+"Operation cancelled."
+msgstr ""
+"ドライバーのインストールには管理者権限が必要です。\n"
+"操作はキャンセルされました。"
+
+#: mainwindow.cpp:104
+msgid "Confirm Installation"
+msgstr "インストールの確認"
+
+#: mainwindow.cpp:105
+msgid ""
+"The system will install/switch to %1.\n"
+"\n"
+"This requires root privileges and may download packages. Continue?"
+msgstr ""
+"システムは %1 をインストール/切り替えします。\n"
+"\n"
+"これには root 権限が必要で、パッケージをダウンロードする場合があります。続行"
+"しますか？"
+
+#: mainwindow.cpp:115
+msgid "Success"
+msgstr "成功"
+
+#: mainwindow.cpp:116
+msgid ""
+"Driver installed successfully.\n"
+"Please reboot to apply changes."
+msgstr ""
+"ドライバーが正常にインストールされました。\n"
+"変更を適用するには再起動してください。"
+
+#: mainwindow.cpp:119
+msgid "Error"
+msgstr "エラー"
+
+#: mainwindow.cpp:120
+msgid ""
+"Driver installation failed.\n"
+"Check terminal output for details."
+msgstr ""
+"ドライバーのインストールに失敗しました。\n"
+"詳細はターミナルの出力を確認してください。"
+
+#: mainwindow.cpp:133
+msgid "Secure Boot Detected"
+msgstr "セキュアブートが検出されました"
+
+#: mainwindow.cpp:134
+msgid ""
+"Secure Boot is enabled on this system.\n"
+"NVIDIA drivers must be signed to load.\n"
+"\n"
+"Do you want to configure Machine Owner Key (MOK) now?"
+msgstr ""
+"このシステムではセキュアブートが有効です。\n"
+"NVIDIA ドライバーをロードするには署名が必要です。\n"
+"\n"
+"今すぐマシン所有者キー (MOK) を設定しますか？"
+
+#: mainwindow.cpp:138
+msgid "Configure MOK"
+msgstr "MOK を設定"
+
+#: mainwindow.cpp:139
+msgid "Skip (Install anyway)"
+msgstr "スキップ（インストールを続行）"
+
+#: mainwindow.cpp:149
+msgid "MOK Configuration Failed"
+msgstr "MOK 設定に失敗しました"
+
+#: mainwindow.cpp:150
+msgid ""
+"Failed to set up MOK. You can still install the driver, but it may not load "
+"with Secure Boot enabled."
+msgstr ""
+"MOK の設定に失敗しました。ドライバーは引き続きインストールできますが、セキュ"
+"アブートが有効な状態ではロードされない可能性があります。"
+
+#: mainwindow.cpp:155
+msgid "MOK Configured"
+msgstr "MOK が設定されました"
+
+#: mainwindow.cpp:156
+msgid ""
+"The Machine Owner Key has been imported successfully.\n"
+"\n"
+"When you reboot, the MOK management interface will appear.\n"
+"Select 'Enroll MOK' -> 'Continue' -> 'Yes' and enter the password:\n"
+"    nvidia-mok\n"
+"\n"
+"After enrolling, the driver will load correctly."
+msgstr ""
+"マシン所有者キーが正常にインポートされました。\n"
+"\n"
+"再起動すると MOK 管理インターフェースが表示されます。\n"
+"「Enroll MOK」→「Continue」→「Yes」を選択し、パスワードを入力してください:\n"
+"    nvidia-mok\n"
+"\n"
+"登録後、ドライバーは正しくロードされます。"
