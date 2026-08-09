@@ -13,10 +13,13 @@ public:
     static QString installedDriverPackage();
     static QString installedDriverVersion();
     static QMap<QString, QString> availableDrivers();
-    static bool installDriver(const QString &packageName);
+    static bool installDriver(const QStringList &packages);
     static bool hasSecureBoot();
     static bool configureMok();
-    static bool checkAuthorization();  // New: Polkit pre‑auth
+    static bool checkAuthorization();
+
+    // 新增：设置跳过检测标志
+    static void setSkipCheck(bool skip);
 };
 
 #endif // DRIVERUTILS_H

@@ -5,6 +5,7 @@
 #include <QComboBox>
 #include <QPushButton>
 #include <QLabel>
+#include <QCheckBox>
 #include <KLocalizedString>
 
 class MainWindow : public QMainWindow
@@ -24,6 +25,7 @@ private:
     QLabel *currentVersionLabel;
     QComboBox *driverCombo;
     QPushButton *installButton;
+    QCheckBox *secureBootCheckBox;
 };
 
 #endif // MAINWINDOW_H

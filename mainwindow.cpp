@@ -10,7 +10,7 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
     setWindowTitle(i18n("NVIDIA Driver Manager"));
-    resize(520, 280);
+    resize(520, 320);
 
     auto *centralWidget = new QWidget(this);
     setCentralWidget(centralWidget);
@@ -34,6 +34,10 @@ MainWindow::MainWindow(QWidget *parent)
         driverCombo->addItem(it.key(), it.value());
     }
     selectorLayout->addWidget(driverCombo);
+
+    secureBootCheckBox = new QCheckBox(i18n("Configure MOK for Secure Boot (if enabled)"), this);
+    secureBootCheckBox->setChecked(true);
+    selectorLayout->addWidget(secureBootCheckBox);
 
     installButton = new QPushButton(i18n("Install / Switch Driver"), this);
     installButton->setIcon(QIcon::fromTheme("system-run"));
@@ -85,12 +89,39 @@ void MainWindow::onInstallClicked()
     QString selectedPkg = driverCombo->currentData().toString();
     if (selectedPkg.isEmpty()) return;
 
-    // 1. Secure Boot check
-    if (!ensureSecureBootConfigured()) {
-        return;
+    // Secure Boot handling (if checkbox is checked)
+    if (secureBootCheckBox->isChecked()) {
+        if (!ensureSecureBootConfigured()) {
+            return;
+        }
+    } else {
+        if (DriverUtils::hasSecureBoot()) {
+            QMessageBox::information(this, i18n("Secure Boot Ignored"),
+                                     i18n("Secure Boot is enabled, but you chose not to configure MOK.\n"
+                                          "The driver may fail to load after installation."));
+        }
     }
 
-    // 2. Polkit authentication (pre‑authorization)
+    // Build package list: driver + corresponding CUDA package
+    QString suffix = selectedPkg;
+    suffix.remove("akmod-nvidia");
+    if (suffix.startsWith("-")) suffix.remove(0, 1);
+    QString cudaPkg = "xorg-x11-drv-nvidia-cuda";
+    if (!suffix.isEmpty()) cudaPkg += "-" + suffix;
+    QStringList packages = {selectedPkg, cudaPkg};
+
+    // Confirm installation (before requesting admin rights)
+    auto answer = QMessageBox::question(
+        this,
+        i18n("Confirm Installation"),
+        i18n("The system will install/switch to the following packages:\n%1\n\n"
+             "This requires root privileges and may download packages. Continue?",
+             packages.join("\n")),
+        QMessageBox::Yes | QMessageBox::No
+    );
+    if (answer != QMessageBox::Yes) return;
+
+    // Polkit authentication only after user confirms
     if (!DriverUtils::checkAuthorization()) {
         QMessageBox::warning(this, i18n("Authentication Required"),
                              i18n("Administrator privileges are required to install drivers.\n"
@@ -98,19 +129,7 @@ void MainWindow::onInstallClicked()
         return;
     }
 
-    // 3. Confirm installation
-    auto answer = QMessageBox::question(
-        this,
-        i18n("Confirm Installation"),
-        i18n("The system will install/switch to %1.\n\n"
-             "This requires root privileges and may download packages. Continue?",
-             driverCombo->currentText()),
-        QMessageBox::Yes | QMessageBox::No
-    );
-    if (answer != QMessageBox::Yes) return;
-
-    // 4. Perform installation
-    bool success = DriverUtils::installDriver(selectedPkg);
+    bool success = DriverUtils::installDriver(packages);
     if (success) {
         QMessageBox::information(this, i18n("Success"),
                                  i18n("Driver installed successfully.\n"

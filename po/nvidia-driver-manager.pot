@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nvidia-driver-manager 1.0\n"
 "Report-Msgid-Bugs-To: your@email.com\n"
-"POT-Creation-Date: 2026-08-06 20:03+0800\n"
+"POT-Creation-Date: 2026-08-09 12:33+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,16 +17,16 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: main.cpp:17 mainwindow.cpp:12
+#: main.cpp:28 mainwindow.cpp:12
 msgid "NVIDIA Driver Manager"
 msgstr ""
 
-#: main.cpp:19
+#: main.cpp:30
 msgid "Manage NVIDIA drivers on Fedora Linux"
 msgstr ""
 
-#: main.cpp:21
-msgid "(c) 2025 Your Name"
+#: main.cpp:32
+msgid "(C) 2027 KairikiFedora"
 msgstr ""
 
 #: mainwindow.cpp:20
@@ -42,71 +42,86 @@ msgid "Select Driver Version"
 msgstr ""
 
 #: mainwindow.cpp:38
+msgid "Configure MOK for Secure Boot (if enabled)"
+msgstr ""
+
+#: mainwindow.cpp:42
 msgid "Install / Switch Driver"
 msgstr ""
 
-#: mainwindow.cpp:54
+#: mainwindow.cpp:58
 msgid "NVIDIA GPU detected ✓"
 msgstr ""
 
-#: mainwindow.cpp:59
+#: mainwindow.cpp:63
 msgid "This computer does not need additional drivers."
 msgstr ""
 
-#: mainwindow.cpp:67
+#: mainwindow.cpp:71
 msgid "Current driver: not installed"
 msgstr ""
 
-#: mainwindow.cpp:69
+#: mainwindow.cpp:73
 msgid "Current driver: %1"
 msgstr ""
 
-#: mainwindow.cpp:95
+#: mainwindow.cpp:99
+msgid "Secure Boot Ignored"
+msgstr ""
+
+#: mainwindow.cpp:100
+msgid ""
+"Secure Boot is enabled, but you chose not to configure MOK.\n"
+"The driver may fail to load after installation."
+msgstr ""
+
+#: mainwindow.cpp:116
+msgid "Confirm Installation"
+msgstr ""
+
+#: mainwindow.cpp:117
+msgid ""
+"The system will install/switch to the following packages:\n"
+"%1\n"
+"\n"
+"This requires root privileges and may download packages. Continue?"
+msgstr ""
+
+#: mainwindow.cpp:126
 msgid "Authentication Required"
 msgstr ""
 
-#: mainwindow.cpp:96
+#: mainwindow.cpp:127
 msgid ""
 "Administrator privileges are required to install drivers.\n"
 "Operation cancelled."
 msgstr ""
 
-#: mainwindow.cpp:104
-msgid "Confirm Installation"
-msgstr ""
-
-#: mainwindow.cpp:105
-msgid ""
-"The system will install/switch to %1.\n"
-"\n"
-"This requires root privileges and may download packages. Continue?"
-msgstr ""
-
-#: mainwindow.cpp:115
+#: mainwindow.cpp:134
 msgid "Success"
 msgstr ""
 
-#: mainwindow.cpp:116
+#: mainwindow.cpp:135
 msgid ""
 "Driver installed successfully.\n"
 "Please reboot to apply changes."
 msgstr ""
 
-#: mainwindow.cpp:119
+#: mainwindow.cpp:138
 msgid "Error"
 msgstr ""
 
-#: mainwindow.cpp:120
+#: mainwindow.cpp:139
 msgid ""
 "Driver installation failed.\n"
 "Check terminal output for details."
 msgstr ""
 
-#: mainwindow.cpp:133
+#: mainwindow.cpp:152
 msgid "Secure Boot Detected"
 msgstr ""
 
-#: mainwindow.cpp:134
+#: mainwindow.cpp:153
 msgid ""
 "Secure Boot is enabled on this system.\n"
 "NVIDIA drivers must be signed to load.\n"
@@ -114,29 +129,29 @@ msgid ""
 "Do you want to configure Machine Owner Key (MOK) now?"
 msgstr ""
 
-#: mainwindow.cpp:138
+#: mainwindow.cpp:157
 msgid "Configure MOK"
 msgstr ""
 
-#: mainwindow.cpp:139
+#: mainwindow.cpp:158
 msgid "Skip (Install anyway)"
 msgstr ""
 
-#: mainwindow.cpp:149
+#: mainwindow.cpp:168
 msgid "MOK Configuration Failed"
 msgstr ""
 
-#: mainwindow.cpp:150
+#: mainwindow.cpp:169
 msgid ""
 "Failed to set up MOK. You can still install the driver, but it may not load "
 "with Secure Boot enabled."
 msgstr ""
 
-#: mainwindow.cpp:155
+#: mainwindow.cpp:174
 msgid "MOK Configured"
 msgstr ""
 
-#: mainwindow.cpp:156
+#: mainwindow.cpp:175
 msgid ""
 "The Machine Owner Key has been imported successfully.\n"
 "\n"

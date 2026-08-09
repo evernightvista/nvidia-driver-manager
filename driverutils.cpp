@@ -5,8 +5,20 @@
 #include <QDir>
 #include <QFile>
 
+static bool s_skipCheck = false;
+
+void DriverUtils::setSkipCheck(bool skip)
+{
+    s_skipCheck = skip;
+}
+
 bool DriverUtils::hasNvidiaGpu()
 {
+    if (s_skipCheck) {
+        qDebug() << "Command-line --skip: forcing NVIDIA GPU presence.";
+        return true;
+    }
+
     QProcess proc;
     proc.start("lspci", {"-nn"});
     proc.waitForFinished(5000);
@@ -57,13 +69,16 @@ QMap<QString, QString> DriverUtils::availableDrivers()
     return map;
 }
 
-bool DriverUtils::installDriver(const QString &packageName)
+bool DriverUtils::installDriver(const QStringList &packages)
 {
-    QProcess proc;
+    if (packages.isEmpty()) return false;
+
     QStringList args;
-    args << "dnf" << "install" << "-y" << packageName;
+    args << "dnf" << "install" << "-y";
+    args << packages;
     args << "--allowerasing";
 
+    QProcess proc;
     proc.start("pkexec", args);
     proc.waitForFinished(-1);
     return proc.exitCode() == 0;
@@ -127,8 +142,6 @@ bool DriverUtils::configureMok()
 
 bool DriverUtils::checkAuthorization()
 {
-    // Use pkexec with a harmless command to trigger Polkit authentication.
-    // If the user fails to authenticate, pkexec will return a non‑zero exit code.
     QProcess proc;
     proc.start("pkexec", {"/bin/true"});
     proc.waitForFinished(-1);

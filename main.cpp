@@ -1,14 +1,25 @@
 #include <QApplication>
+#include <QIcon>
 #include <KLocalizedString>
 #include <KAboutData>
 #include <KCrash>
 #include "mainwindow.h"
+#include "driverutils.h"
 
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
     app.setApplicationName(QStringLiteral("nvidia-driver-manager"));
     app.setOrganizationDomain(QStringLiteral("fedoraproject.org"));
+
+    // Set window icon from system theme (Scheme 1)
+    app.setWindowIcon(QIcon::fromTheme("nvidia-settings"));
+
+    // Parse --skip command line argument
+    QStringList args = app.arguments();
+    if (args.contains("--skip")) {
+        DriverUtils::setSkipCheck(true);
+    }
 
     KLocalizedString::setApplicationDomain("nvidia-driver-manager");
 
@@ -18,7 +29,7 @@ int main(int argc, char *argv[])
         QStringLiteral("1.0"),
         i18n("Manage NVIDIA drivers on Fedora Linux"),
         KAboutLicense::GPL_V3,
-        i18n("(c) 2025 Your Name")
+        i18n("(C) 2027 KairikiFedora")
     );
     KAboutData::setApplicationData(aboutData);
 
