@@ -291,3 +291,31 @@ msgstr ""
 "    %1\n"
 "\n"
 "Après l'enregistrement, le pilote se chargera correctement."
+
+#: mainwindow.cpp:117
+msgid "MOK Configuration Log"
+msgstr "Journal de configuration MOK"
+
+#: mainwindow.cpp:138
+msgid "Error: Cannot create temporary directory."
+msgstr "Erreur : Impossible de créer le répertoire temporaire."
+
+#: mainwindow.cpp:148
+msgid "Error: Cannot write temporary script."
+msgstr "Erreur : Impossible d'écrire le script temporaire."
+
+#: mainwindow.cpp:274
+msgid ""
+"\n"
+"--- MOK configuration finished with exit code %1 ---"
+msgstr ""
+"\n"
+"--- Configuration MOK terminée avec le code de sortie %1 ---"
+
+#: mainwindow.cpp:276
+msgid "MOK configuration completed successfully."
+msgstr "Configuration MOK terminée avec succès."
+
+#: mainwindow.cpp:278
+msgid "MOK configuration failed. Please check the log for details."
+msgstr "La configuration MOK a échoué. Veuillez consulter le journal pour plus de détails."

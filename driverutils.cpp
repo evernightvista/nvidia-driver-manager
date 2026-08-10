@@ -138,43 +138,63 @@ bool DriverUtils::configureMok(const QString &password)
         return false;
     }
 
-    // 脚本逻辑：
-    // 1. 确保两个目录存在（mkdir -p）
-    // 2. 若证书或密钥缺失，则运行 kmodgenca -a 生成
-    // 3. 导入 MOK（如果已注册，自动跳过）
-    // 不再删除任何文件或目录
+    // 与 mainwindow.cpp 中的脚本保持一致（含强制删除旧证书和 stdbuf）
     QStringList scriptLines;
     scriptLines << "#!/bin/bash";
     scriptLines << "set -e";
+    scriptLines << "set -o pipefail";
     scriptLines << "CERT_DIR=\"/etc/pki/akmods/certs\"";
     scriptLines << "PRIV_DIR=\"/etc/pki/akmods/private\"";
     scriptLines << "CERT_FILE=\"$CERT_DIR/public_key.der\"";
-    scriptLines << "KEY_FILE=\"$PRIV_DIR/signing_key.pem\"";
+    scriptLines << "KEY_FILE=\"$PRIV_DIR/private_key.priv\"";
     scriptLines << "PASSWORD=\"" + password + "\"";
     scriptLines << "";
-    scriptLines << "# 确保目录存在（不删除任何现有文件）";
     scriptLines << "mkdir -p \"$CERT_DIR\" \"$PRIV_DIR\"";
     scriptLines << "";
-    scriptLines << "# 如果证书或密钥缺失，则生成新密钥（不会覆盖现有文件）";
-    scriptLines << "if [ ! -f \"$CERT_FILE\" ] || [ ! -f \"$KEY_FILE\" ]; then";
-    scriptLines << "  echo \"Generating new signing key and certificate using kmodgenca -a...\"";
-    scriptLines << "  kmodgenca -a";
-    scriptLines << "else";
-    scriptLines << "  echo \"Existing signing key and certificate found, skipping generation.\"";
-    scriptLines << "fi";
+    scriptLines << "rm -f \"$CERT_FILE\" \"$KEY_FILE\"";
     scriptLines << "";
-    scriptLines << "# 导入 MOK（若已注册则自动跳过）";
-    scriptLines << "echo \"Importing certificate to MOK...\"";
-    scriptLines << "if printf \"%s\\n%s\\n\" \"$PASSWORD\" \"$PASSWORD\" | mokutil --import \"$CERT_FILE\" 2>&1 | tee /tmp/mok_import.log; then";
-    scriptLines << "  echo \"Import succeeded.\"";
-    scriptLines << "else";
-    scriptLines << "  if grep -qi \"already\" /tmp/mok_import.log; then";
-    scriptLines << "    echo \"Certificate already enrolled, skipping.\"";
-    scriptLines << "  else";
-    scriptLines << "    echo \"Import failed.\"";
+    scriptLines << "if ! command -v kmodgenca &>/dev/null && ! [ -x /usr/bin/kmodgenca ]; then";
+    scriptLines << "  echo \"kmodgenca not found, installing akmods-evernight...\"";
+    scriptLines << "  stdbuf -oL dnf install -y --nogpgcheck akmods-evernight 2>&1 | tee -a /tmp/nvidia-driver-installer.log";
+    scriptLines << "  if [ $? -ne 0 ]; then";
+    scriptLines << "    echo \"ERROR: dnf install akmods-evernight failed.\"";
+    scriptLines << "    exit 1";
+    scriptLines << "  fi";
+    scriptLines << "  if ! command -v kmodgenca &>/dev/null && ! [ -x /usr/bin/kmodgenca ]; then";
+    scriptLines << "    echo \"ERROR: kmodgenca still not found after installation.\"";
     scriptLines << "    exit 1";
     scriptLines << "  fi";
     scriptLines << "fi";
+    scriptLines << "";
+    scriptLines << "echo \"Generating new signing key and certificate using /usr/bin/kmodgenca -a -f...\"";
+    scriptLines << "/usr/bin/kmodgenca -a -f >> /tmp/nvidia-driver-installer.log 2>&1";
+    scriptLines << "if [ $? -ne 0 ]; then";
+    scriptLines << "  echo \"ERROR: kmodgenca -a -f failed.\"";
+    scriptLines << "  exit 1";
+    scriptLines << "fi";
+    scriptLines << "";
+    scriptLines << "if [ ! -f \"$CERT_FILE\" ] || [ ! -f \"$KEY_FILE\" ]; then";
+    scriptLines << "  echo \"ERROR: kmodgenca -a -f did not create certificate files.\"";
+    scriptLines << "  exit 1";
+    scriptLines << "fi";
+    scriptLines << "echo \"Certificate and key files exist.\"";
+    scriptLines << "";
+    scriptLines << "echo \"Importing certificate to MOK...\"";
+    scriptLines << "set +e";
+    scriptLines << "printf \"%s\\n%s\\n\" \"$PASSWORD\" \"$PASSWORD\" | stdbuf -oL mokutil --import \"$CERT_FILE\" > /tmp/mok_import.log 2>&1";
+    scriptLines << "MOK_EXIT=$?";
+    scriptLines << "if [ $MOK_EXIT -eq 0 ]; then";
+    scriptLines << "  echo \"Import succeeded.\"";
+    scriptLines << "else";
+    scriptLines << "  if grep -qi -e \"already\" -e \"exists\" /tmp/mok_import.log; then";
+    scriptLines << "    echo \"Certificate already enrolled, skipping.\"";
+    scriptLines << "  else";
+    scriptLines << "    echo \"Import failed with exit code $MOK_EXIT. Error output:\"";
+    scriptLines << "    cat /tmp/mok_import.log";
+    scriptLines << "    exit 1";
+    scriptLines << "  fi";
+    scriptLines << "fi";
+    scriptLines << "set -e";
 
     scriptFile.write(scriptLines.join("\n").toUtf8());
     scriptFile.setPermissions(QFileDevice::ExeOwner | QFileDevice::ReadOwner);

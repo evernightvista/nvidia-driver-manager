@@ -291,3 +291,31 @@ msgstr ""
 "    %1\n"
 "\n"
 "登録後、ドライバーは正しく読み込まれます。"
+
+#: mainwindow.cpp:117
+msgid "MOK Configuration Log"
+msgstr "MOK設定ログ"
+
+#: mainwindow.cpp:138
+msgid "Error: Cannot create temporary directory."
+msgstr "エラー：一時ディレクトリを作成できません。"
+
+#: mainwindow.cpp:148
+msgid "Error: Cannot write temporary script."
+msgstr "エラー：一時スクリプトを書き込めません。"
+
+#: mainwindow.cpp:274
+msgid ""
+"\n"
+"--- MOK configuration finished with exit code %1 ---"
+msgstr ""
+"\n"
+"--- MOK設定が終了しました（終了コード %1）---"
+
+#: mainwindow.cpp:276
+msgid "MOK configuration completed successfully."
+msgstr "MOK設定が正常に完了しました。"
+
+#: mainwindow.cpp:278
+msgid "MOK configuration failed. Please check the log for details."
+msgstr "MOK設定に失敗しました。詳細はログを確認してください。"

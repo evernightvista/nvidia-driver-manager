@@ -291,3 +291,31 @@ msgstr ""
 "    %1\n"
 "\n"
 "등록 후 드라이버가 올바르게 로드됩니다."
+
+#: mainwindow.cpp:117
+msgid "MOK Configuration Log"
+msgstr "MOK 구성 로그"
+
+#: mainwindow.cpp:138
+msgid "Error: Cannot create temporary directory."
+msgstr "오류: 임시 디렉터리를 생성할 수 없습니다."
+
+#: mainwindow.cpp:148
+msgid "Error: Cannot write temporary script."
+msgstr "오류: 임시 스크립트를 작성할 수 없습니다."
+
+#: mainwindow.cpp:274
+msgid ""
+"\n"
+"--- MOK configuration finished with exit code %1 ---"
+msgstr ""
+"\n"
+"--- MOK 구성 완료 (종료 코드 %1) ---"
+
+#: mainwindow.cpp:276
+msgid "MOK configuration completed successfully."
+msgstr "MOK 구성이 성공적으로 완료되었습니다."
+
+#: mainwindow.cpp:278
+msgid "MOK configuration failed. Please check the log for details."
+msgstr "MOK 구성에 실패했습니다. 자세한 내용은 로그를 확인하세요."

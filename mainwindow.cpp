@@ -9,6 +9,8 @@
 #include <QInputDialog>
 #include <QDateTime>
 #include <QTextCursor>
+#include <QEventLoop>
+#include <QTemporaryDir>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -17,6 +19,13 @@ MainWindow::MainWindow(QWidget *parent)
     , logEdit(nullptr)
     , closeButton(nullptr)
     , logFile(nullptr)
+    , mokProcess(nullptr)
+    , mokLogDialog(nullptr)
+    , mokLogEdit(nullptr)
+    , mokCloseButton(nullptr)
+    , mokInProgress(false)
+    , mokTempDir(nullptr)
+    , mokSuccess(false)          // <--- 初始化 mokSuccess
 {
     setWindowTitle(i18n("NVIDIA Driver Manager"));
     resize(520, 320);
@@ -26,7 +35,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     auto *mainLayout = new QVBoxLayout(centralWidget);
 
-    // 高亮信息条（绿色，信息图标）
     gpuMessage = new KMessageWidget(this);
     gpuMessage->setWordWrap(true);
     gpuMessage->setCloseButtonVisible(false);
@@ -101,6 +109,268 @@ void MainWindow::refreshStatus()
     }
 }
 
+void MainWindow::startMokConfiguration(const QString &password)
+{
+    mokSuccess = false;   // <--- 重置成功标志
+
+    mokLogDialog = new QDialog(this);
+    mokLogDialog->setWindowTitle(i18n("MOK Configuration Log"));
+    mokLogDialog->resize(700, 400);
+    mokLogDialog->setAttribute(Qt::WA_DeleteOnClose);
+
+    mokLogEdit = new QTextEdit(mokLogDialog);
+    mokLogEdit->setReadOnly(true);
+    mokLogEdit->setFontFamily("monospace");
+    mokLogEdit->setLineWrapMode(QTextEdit::NoWrap);
+
+    mokCloseButton = new QPushButton(i18n("Close"), mokLogDialog);
+    mokCloseButton->setEnabled(false);
+
+    QVBoxLayout *layout = new QVBoxLayout(mokLogDialog);
+    layout->addWidget(mokLogEdit);
+    layout->addWidget(mokCloseButton, 0, Qt::AlignRight);
+
+    connect(mokCloseButton, &QPushButton::clicked, mokLogDialog, &QDialog::accept);
+    mokLogDialog->show();
+
+    mokTempDir = new QTemporaryDir();
+    if (!mokTempDir->isValid()) {
+        mokLogEdit->append(i18n("Error: Cannot create temporary directory."));
+        mokCloseButton->setEnabled(true);
+        delete mokTempDir;
+        mokTempDir = nullptr;
+        return;
+    }
+
+    QString scriptPath = mokTempDir->path() + "/setup-mok.sh";
+    QFile scriptFile(scriptPath);
+    if (!scriptFile.open(QIODevice::WriteOnly | QIODevice::Text)) {
+        mokLogEdit->append(i18n("Error: Cannot write temporary script."));
+        mokCloseButton->setEnabled(true);
+        delete mokTempDir;
+        mokTempDir = nullptr;
+        return;
+    }
+
+    // ========== 最终修正脚本（强制删除旧证书 + 改进导入） ==========
+    QStringList scriptLines;
+    scriptLines << "#!/bin/bash";
+    scriptLines << "set -e";
+    scriptLines << "set -o pipefail";
+    scriptLines << "CERT_DIR=\"/etc/pki/akmods/certs\"";
+    scriptLines << "PRIV_DIR=\"/etc/pki/akmods/private\"";
+    scriptLines << "CERT_FILE=\"$CERT_DIR/public_key.der\"";
+    scriptLines << "KEY_FILE=\"$PRIV_DIR/private_key.priv\"";
+    scriptLines << "PASSWORD=\"" + password + "\"";
+    scriptLines << "";
+    scriptLines << "mkdir -p \"$CERT_DIR\" \"$PRIV_DIR\"";
+    scriptLines << "";
+    scriptLines << "# 强制删除旧证书和私钥，确保生成全新密钥对";
+    scriptLines << "rm -f \"$CERT_FILE\" \"$KEY_FILE\"";
+    scriptLines << "";
+    scriptLines << "# 检查 kmodgenca 是否可用，若不可用则安装 akmods-evernight";
+    scriptLines << "if ! command -v kmodgenca &>/dev/null && ! [ -x /usr/bin/kmodgenca ]; then";
+    scriptLines << "  echo \"kmodgenca not found, installing akmods-evernight...\"";
+    scriptLines << "  stdbuf -oL dnf install -y --nogpgcheck akmods-evernight 2>&1 | tee -a /tmp/nvidia-driver-installer.log";
+    scriptLines << "  if [ $? -ne 0 ]; then";
+    scriptLines << "    echo \"ERROR: dnf install akmods-evernight failed.\"";
+    scriptLines << "    exit 1";
+    scriptLines << "  fi";
+    scriptLines << "  if ! command -v kmodgenca &>/dev/null && ! [ -x /usr/bin/kmodgenca ]; then";
+    scriptLines << "    echo \"ERROR: kmodgenca still not found after installation.\"";
+    scriptLines << "    exit 1";
+    scriptLines << "  fi";
+    scriptLines << "fi";
+    scriptLines << "";
+    scriptLines << "# 强制生成新证书（直接重定向，避免管道导致失败）";
+    scriptLines << "echo \"Generating new signing key and certificate using /usr/bin/kmodgenca -a -f...\"";
+    scriptLines << "/usr/bin/kmodgenca -a -f >> /tmp/nvidia-driver-installer.log 2>&1";
+    scriptLines << "if [ $? -ne 0 ]; then";
+    scriptLines << "  echo \"ERROR: kmodgenca -a -f failed.\"";
+    scriptLines << "  exit 1";
+    scriptLines << "fi";
+    scriptLines << "";
+    scriptLines << "# 确保证书和密钥文件已生成";
+    scriptLines << "if [ ! -f \"$CERT_FILE\" ] || [ ! -f \"$KEY_FILE\" ]; then";
+    scriptLines << "  echo \"ERROR: kmodgenca -a -f did not create certificate files.\"";
+    scriptLines << "  exit 1";
+    scriptLines << "fi";
+    scriptLines << "echo \"Certificate and key files exist.\"";
+    scriptLines << "";
+    scriptLines << "# 导入 MOK（若已注册则自动跳过）";
+    scriptLines << "echo \"Importing certificate to MOK...\"";
+    scriptLines << "set +e";
+    scriptLines << "printf \"%s\\n%s\\n\" \"$PASSWORD\" \"$PASSWORD\" | stdbuf -oL mokutil --import \"$CERT_FILE\" > /tmp/mok_import.log 2>&1";
+    scriptLines << "MOK_EXIT=$?";
+    scriptLines << "if [ $MOK_EXIT -eq 0 ]; then";
+    scriptLines << "  echo \"Import succeeded.\"";
+    scriptLines << "else";
+    scriptLines << "  if grep -qi -e \"already\" -e \"exists\" /tmp/mok_import.log; then";
+    scriptLines << "    echo \"Certificate already enrolled, skipping.\"";
+    scriptLines << "  else";
+    scriptLines << "    echo \"Import failed with exit code $MOK_EXIT. Error output:\"";
+    scriptLines << "    cat /tmp/mok_import.log";
+    scriptLines << "    exit 1";
+    scriptLines << "  fi";
+    scriptLines << "fi";
+    scriptLines << "set -e";
+
+    scriptFile.write(scriptLines.join("\n").toUtf8());
+    scriptFile.setPermissions(QFileDevice::ExeOwner | QFileDevice::ReadOwner);
+    scriptFile.close();
+
+    mokProcess = new QProcess(this);
+    mokProcess->setProcessChannelMode(QProcess::MergedChannels);
+
+    connect(mokProcess, &QProcess::readyReadStandardOutput, this, &MainWindow::onMokOutput);
+    connect(mokProcess, &QProcess::readyReadStandardError, this, &MainWindow::onMokOutput);
+    connect(mokProcess, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished),
+            this, &MainWindow::onMokFinished);
+
+    mokProcess->start("pkexec", {"bash", scriptPath});
+    if (!mokProcess->waitForStarted()) {
+        mokLogEdit->append(i18n("Failed to start pkexec."));
+        mokCloseButton->setEnabled(true);
+        mokProcess->deleteLater();
+        mokProcess = nullptr;
+        delete mokTempDir;
+        mokTempDir = nullptr;
+        return;
+    }
+
+    mokInProgress = true;
+    installButton->setEnabled(false);
+}
+
+void MainWindow::onMokOutput()
+{
+    if (!mokProcess) return;
+    QByteArray data = mokProcess->readAllStandardOutput();
+    if (data.isEmpty()) return;
+
+    QString text = QString::fromUtf8(data);
+    if (mokLogEdit) {
+        mokLogEdit->append(text);
+        QTextCursor cursor = mokLogEdit->textCursor();
+        cursor.movePosition(QTextCursor::End);
+        mokLogEdit->setTextCursor(cursor);
+    }
+
+    // 写入日志文件时强制转换为 UTF-8，避免乱码
+    if (logFile && logFile->isOpen()) {
+        QString utf8Text = QString::fromUtf8(data);
+        logFile->write(utf8Text.toUtf8());
+        logFile->flush();
+    }
+}
+
+void MainWindow::onMokFinished(int exitCode, QProcess::ExitStatus status)
+{
+    bool success = (status == QProcess::NormalExit && exitCode == 0);
+
+    mokSuccess = success;   // <--- 记录结果
+
+    if (mokLogEdit) {
+        mokLogEdit->append(i18n("\n--- MOK configuration finished with exit code %1 ---", exitCode));
+        if (success) {
+            mokLogEdit->append(i18n("MOK configuration completed successfully."));
+        } else {
+            mokLogEdit->append(i18n("MOK configuration failed. Please check the log for details."));
+        }
+    }
+
+    if (mokCloseButton) mokCloseButton->setEnabled(true);
+    installButton->setEnabled(true);
+
+    QFile logFile("/tmp/nvidia-driver-installer.log");
+    if (logFile.open(QIODevice::Append | QIODevice::WriteOnly)) {
+        logFile.write("=== MOK configuration finished with exit code ");
+        logFile.write(QByteArray::number(exitCode));
+        logFile.write(" ===\n");
+        logFile.close();
+    }
+
+    if (mokProcess) {
+        mokProcess->deleteLater();
+        mokProcess = nullptr;
+    }
+    if (mokTempDir) {
+        delete mokTempDir;
+        mokTempDir = nullptr;
+    }
+    mokInProgress = false;   // <--- 最后再设置，确保 success 已保存
+}
+
+bool MainWindow::ensureSecureBootConfigured()
+{
+    if (!DriverUtils::hasSecureBoot()) {
+        return true;
+    }
+
+    QMessageBox msgBox(this);
+    msgBox.setWindowTitle(i18n("Secure Boot Detected"));
+    msgBox.setText(i18n("Secure Boot is enabled on this system.\n"
+                        "NVIDIA drivers must be signed to load.\n\n"
+                        "Do you want to configure Machine Owner Key (MOK) now?"));
+    msgBox.setIcon(QMessageBox::Question);
+    QPushButton *configureBtn = msgBox.addButton(i18n("Configure MOK"), QMessageBox::AcceptRole);
+    QPushButton *skipBtn = msgBox.addButton(i18n("Skip (Install anyway)"), QMessageBox::RejectRole);
+    msgBox.setDefaultButton(configureBtn);
+    msgBox.exec();
+
+    if (msgBox.clickedButton() == skipBtn) {
+        return true;
+    }
+
+    bool ok;
+    QString password = QInputDialog::getText(this, i18n("Set MOK Password"),
+                                             i18n("Please enter a password for the Machine Owner Key (MOK).\n"
+                                                  "You will need to enter this password after reboot in the MOK management interface.\n"
+                                                  "Password:"),
+                                             QLineEdit::Password, "", &ok);
+    if (!ok || password.isEmpty()) {
+        QMessageBox::warning(this, i18n("Password Required"),
+                             i18n("MOK configuration cancelled. You can still install the driver, "
+                                  "but it may not load with Secure Boot enabled."));
+        return true;
+    }
+
+    QString confirm = QInputDialog::getText(this, i18n("Confirm MOK Password"),
+                                            i18n("Please re-enter the password to confirm:"),
+                                            QLineEdit::Password, "", &ok);
+    if (!ok || password != confirm) {
+        QMessageBox::warning(this, i18n("Password Mismatch"),
+                             i18n("Passwords do not match. MOK configuration cancelled."));
+        return true;
+    }
+
+    startMokConfiguration(password);
+
+    QEventLoop loop;
+    connect(mokProcess, &QProcess::finished, &loop, &QEventLoop::quit);
+    while (mokInProgress) {
+        loop.exec();
+    }
+
+    // 使用 mokSuccess 判断，而不是 mokProcess 指针
+    bool success = mokSuccess;
+    if (!success) {
+        QMessageBox::critical(this, i18n("MOK Configuration Failed"),
+                              i18n("Failed to set up MOK. You can still install the driver, "
+                                   "but it may not load with Secure Boot enabled."));
+        return true;
+    }
+
+    QMessageBox::information(this, i18n("MOK Configured"),
+                             i18n("The Machine Owner Key has been imported successfully.\n\n"
+                                  "When you reboot, the MOK management interface will appear.\n"
+                                  "Select 'Enroll MOK' -> 'Continue' -> 'Yes' and enter the password you just set:\n"
+                                  "    %1\n\n"
+                                  "After enrolling, the driver will load correctly.", password));
+    return true;
+}
+
+// 以下函数（onInstallClicked, onInstallOutput, onInstallFinished）与之前相同，但为了保证完整性，一并给出
 void MainWindow::onInstallClicked()
 {
     QString selectedPkg = driverCombo->currentData().toString();
@@ -163,7 +433,6 @@ void MainWindow::onInstallClicked()
     );
     if (answer != QMessageBox::Yes) return;
 
-    // 日志对话框
     logDialog = new QDialog(this);
     logDialog->setWindowTitle(i18n("Driver Installation Log"));
     logDialog->resize(700, 400);
@@ -186,7 +455,6 @@ void MainWindow::onInstallClicked()
 
     installButton->setEnabled(false);
 
-    // 异步安装
     installProcess = new QProcess(this);
     installProcess->setProcessChannelMode(QProcess::MergedChannels);
 
@@ -205,16 +473,16 @@ void MainWindow::onInstallClicked()
     }
 
     logFile = new QFile("/tmp/nvidia-driver-installer.log", this);
-    if (logFile->open(QIODevice::Append | QIODevice::Text)) {
-        QTextStream out(logFile);
-        out << "\n=== Installation started at " << QDateTime::currentDateTime().toString()
-            << " ===\n";
-        out << "Package manager: " << pkgMgr << "\n";
-        out << "Packages: " << packagesToInstall.join(", ") << "\n";
+    if (logFile->open(QIODevice::Append | QIODevice::WriteOnly)) {
+        QByteArray header;
+        header += "\n=== Installation started at " + QDateTime::currentDateTime().toString().toUtf8() + " ===\n";
+        header += "Package manager: " + pkgMgr.toUtf8() + "\n";
+        header += "Packages: " + packagesToInstall.join(", ").toUtf8() + "\n";
         if (needAllowerasing) {
-            out << "Option: --allowerasing (to replace existing driver)\n";
+            header += "Option: --allowerasing (to replace existing driver)\n";
         }
-        out.flush();
+        logFile->write(header);
+        logFile->flush();
     } else {
         delete logFile;
         logFile = nullptr;
@@ -254,7 +522,8 @@ void MainWindow::onInstallOutput()
     }
 
     if (logFile && logFile->isOpen()) {
-        logFile->write(data);
+        QString utf8Text = QString::fromUtf8(data);
+        logFile->write(utf8Text.toUtf8());
         logFile->flush();
     }
 }
@@ -264,10 +533,11 @@ void MainWindow::onInstallFinished(int exitCode, QProcess::ExitStatus status)
     bool success = (status == QProcess::NormalExit && exitCode == 0);
 
     if (logFile && logFile->isOpen()) {
-        QTextStream out(logFile);
-        out << "=== Installation " << (success ? "SUCCEEDED" : "FAILED")
-            << " at " << QDateTime::currentDateTime().toString() << " ===\n";
-        out.flush();
+        QByteArray footer;
+        footer += "=== Installation " + QByteArray(success ? "SUCCEEDED" : "FAILED") +
+                  " at " + QDateTime::currentDateTime().toString().toUtf8() + " ===\n";
+        logFile->write(footer);
+        logFile->flush();
         logFile->close();
         delete logFile;
         logFile = nullptr;
@@ -304,64 +574,4 @@ void MainWindow::onInstallFinished(int exitCode, QProcess::ExitStatus status)
 
     installProcess->deleteLater();
     installProcess = nullptr;
-}
-
-bool MainWindow::ensureSecureBootConfigured()
-{
-    if (!DriverUtils::hasSecureBoot()) {
-        return true;
-    }
-
-    QMessageBox msgBox(this);
-    msgBox.setWindowTitle(i18n("Secure Boot Detected"));
-    msgBox.setText(i18n("Secure Boot is enabled on this system.\n"
-                        "NVIDIA drivers must be signed to load.\n\n"
-                        "Do you want to configure Machine Owner Key (MOK) now?"));
-    msgBox.setIcon(QMessageBox::Question);
-    QPushButton *configureBtn = msgBox.addButton(i18n("Configure MOK"), QMessageBox::AcceptRole);
-    QPushButton *skipBtn = msgBox.addButton(i18n("Skip (Install anyway)"), QMessageBox::RejectRole);
-    msgBox.setDefaultButton(configureBtn);
-    msgBox.exec();
-
-    if (msgBox.clickedButton() == skipBtn) {
-        return true;
-    }
-
-    bool ok;
-    QString password = QInputDialog::getText(this, i18n("Set MOK Password"),
-                                             i18n("Please enter a password for the Machine Owner Key (MOK).\n"
-                                                  "You will need to enter this password after reboot in the MOK management interface.\n"
-                                                  "Password:"),
-                                             QLineEdit::Password, "", &ok);
-    if (!ok || password.isEmpty()) {
-        QMessageBox::warning(this, i18n("Password Required"),
-                             i18n("MOK configuration cancelled. You can still install the driver, "
-                                  "but it may not load with Secure Boot enabled."));
-        return true;
-    }
-
-    QString confirm = QInputDialog::getText(this, i18n("Confirm MOK Password"),
-                                            i18n("Please re-enter the password to confirm:"),
-                                            QLineEdit::Password, "", &ok);
-    if (!ok || password != confirm) {
-        QMessageBox::warning(this, i18n("Password Mismatch"),
-                             i18n("Passwords do not match. MOK configuration cancelled."));
-        return true;
-    }
-
-    bool success = DriverUtils::configureMok(password);
-    if (!success) {
-        QMessageBox::critical(this, i18n("MOK Configuration Failed"),
-                              i18n("Failed to set up MOK. You can still install the driver, "
-                                   "but it may not load with Secure Boot enabled."));
-        return true;
-    }
-
-    QMessageBox::information(this, i18n("MOK Configured"),
-                             i18n("The Machine Owner Key has been imported successfully.\n\n"
-                                  "When you reboot, the MOK management interface will appear.\n"
-                                  "Select 'Enroll MOK' -> 'Continue' -> 'Yes' and enter the password you just set:\n"
-                                  "    %1\n\n"
-                                  "After enrolling, the driver will load correctly.", password));
-    return true;
 }

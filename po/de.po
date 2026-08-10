@@ -291,3 +291,31 @@ msgstr ""
 "    %1\n"
 "\n"
 "Nach der Registrierung wird der Treiber korrekt geladen."
+
+#: mainwindow.cpp:117
+msgid "MOK Configuration Log"
+msgstr "MOK-Konfigurationsprotokoll"
+
+#: mainwindow.cpp:138
+msgid "Error: Cannot create temporary directory."
+msgstr "Fehler: Temporäres Verzeichnis kann nicht erstellt werden."
+
+#: mainwindow.cpp:148
+msgid "Error: Cannot write temporary script."
+msgstr "Fehler: Temporäres Skript kann nicht geschrieben werden."
+
+#: mainwindow.cpp:274
+msgid ""
+"\n"
+"--- MOK configuration finished with exit code %1 ---"
+msgstr ""
+"\n"
+"--- MOK-Konfiguration abgeschlossen mit Exit-Code %1 ---"
+
+#: mainwindow.cpp:276
+msgid "MOK configuration completed successfully."
+msgstr "MOK-Konfiguration erfolgreich abgeschlossen."
+
+#: mainwindow.cpp:278
+msgid "MOK configuration failed. Please check the log for details."
+msgstr "MOK-Konfiguration fehlgeschlagen. Bitte überprüfen Sie das Protokoll für Details."

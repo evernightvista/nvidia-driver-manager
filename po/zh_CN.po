@@ -291,3 +291,31 @@ msgstr ""
 "    %1\n"
 "\n"
 "注册完成后，驱动程序将正常加载。"
+
+#: mainwindow.cpp:117
+msgid "MOK Configuration Log"
+msgstr "MOK 配置日志"
+
+#: mainwindow.cpp:138
+msgid "Error: Cannot create temporary directory."
+msgstr "错误：无法创建临时目录。"
+
+#: mainwindow.cpp:148
+msgid "Error: Cannot write temporary script."
+msgstr "错误：无法写入临时脚本。"
+
+#: mainwindow.cpp:274
+msgid ""
+"\n"
+"--- MOK configuration finished with exit code %1 ---"
+msgstr ""
+"\n"
+"--- MOK 配置完成，退出代码 %1 ---"
+
+#: mainwindow.cpp:276
+msgid "MOK configuration completed successfully."
+msgstr "MOK 配置成功完成。"
+
+#: mainwindow.cpp:278
+msgid "MOK configuration failed. Please check the log for details."
+msgstr "MOK 配置失败。请查看日志了解详情。"
