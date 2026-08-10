@@ -4,6 +4,7 @@
 #include <QTemporaryDir>
 #include <QDir>
 #include <QFile>
+#include <QDateTime>
 
 static bool s_skipCheck = false;
 
@@ -45,17 +46,19 @@ QString DriverUtils::installedDriverPackage()
 
 QString DriverUtils::installedDriverVersion()
 {
+    QString pkg = installedDriverPackage();
+    if (pkg.isEmpty()) {
+        return {};
+    }
+
     QProcess proc;
-    proc.start("nvidia-smi", {"--query-gpu=driver_version", "--format=csv,noheader"});
+    proc.start("rpm", {"-q", "--queryformat", "%{VERSION}", pkg});
     proc.waitForFinished(5000);
     QString ver = proc.readAllStandardOutput().trimmed();
-    if (!ver.isEmpty())
+    if (!ver.isEmpty()) {
         return ver;
-
-    proc.start("modinfo", {"-F", "version", "nvidia"});
-    proc.waitForFinished(5000);
-    ver = proc.readAllStandardOutput().trimmed();
-    return ver;
+    }
+    return pkg;
 }
 
 QMap<QString, QString> DriverUtils::availableDrivers()
@@ -73,15 +76,43 @@ bool DriverUtils::installDriver(const QStringList &packages)
 {
     if (packages.isEmpty()) return false;
 
+    QString pkgMgr = "dnf";
+    QProcess whichProc;
+    whichProc.start("command", {"-v", "dnf5"});
+    whichProc.waitForFinished();
+    if (whichProc.exitCode() == 0) {
+        pkgMgr = "dnf5";
+    }
+
+    QFile logFile("/tmp/nvidia-driver-installer.log");
+    if (logFile.open(QIODevice::Append | QIODevice::Text)) {
+        QTextStream out(&logFile);
+        out << "\n=== Installation started at " << QDateTime::currentDateTime().toString()
+            << " ===\n";
+        out << "Package manager: " << pkgMgr << "\n";
+        out << "Packages: " << packages.join(", ") << "\n";
+        logFile.close();
+    }
+
     QStringList args;
-    args << "dnf" << "install" << "-y";
-    args << packages;
-    args << "--allowerasing";
+    args << pkgMgr << "install" << "-y" << packages;
 
     QProcess proc;
+    proc.setProcessChannelMode(QProcess::MergedChannels);
     proc.start("pkexec", args);
+    if (!proc.waitForStarted()) {
+        return false;
+    }
     proc.waitForFinished(-1);
-    return proc.exitCode() == 0;
+
+    bool success = (proc.exitCode() == 0);
+    if (logFile.open(QIODevice::Append | QIODevice::Text)) {
+        QTextStream out(&logFile);
+        out << "=== Installation " << (success ? "SUCCEEDED" : "FAILED")
+            << " at " << QDateTime::currentDateTime().toString() << " ===\n";
+        logFile.close();
+    }
+    return success;
 }
 
 bool DriverUtils::hasSecureBoot()
@@ -93,25 +124,8 @@ bool DriverUtils::hasSecureBoot()
     return output.contains("SecureBoot enabled", Qt::CaseInsensitive);
 }
 
-bool DriverUtils::configureMok()
+bool DriverUtils::configureMok(const QString &password)
 {
-    const QString certDir = "/etc/pki/akmods/certs";
-    const QString keyPath = "/etc/pki/akmods/private/signing_key.pem";
-    const QString certPath = certDir + "/public_key.der";
-
-    QStringList scriptLines;
-    scriptLines << "#!/bin/bash";
-    scriptLines << "set -e";
-    scriptLines << "mkdir -p /etc/pki/akmods/private " + certDir;
-    scriptLines << "if [ ! -f \"" + keyPath + "\" ]; then";
-    scriptLines << "  openssl req -new -x509 -newkey rsa:2048 \\";
-    scriptLines << "    -keyout \"" + keyPath + "\" \\";
-    scriptLines << "    -out \"" + certPath + "\" \\";
-    scriptLines << "    -nodes -days 36500 \\";
-    scriptLines << "    -subj \"/CN=NVIDIA Driver Signing Key/\"";
-    scriptLines << "fi";
-    scriptLines << "echo \"nvidia-mok\" | mokutil --import \"" + certPath + "\"";
-
     QTemporaryDir tmpDir;
     if (!tmpDir.isValid()) {
         qWarning() << "Cannot create temporary directory";
@@ -123,19 +137,71 @@ bool DriverUtils::configureMok()
         qWarning() << "Cannot write temporary script";
         return false;
     }
+
+    // 脚本逻辑：
+    // 1. 确保两个目录存在（mkdir -p）
+    // 2. 若证书或密钥缺失，则运行 kmodgenca -a 生成
+    // 3. 导入 MOK（如果已注册，自动跳过）
+    // 不再删除任何文件或目录
+    QStringList scriptLines;
+    scriptLines << "#!/bin/bash";
+    scriptLines << "set -e";
+    scriptLines << "CERT_DIR=\"/etc/pki/akmods/certs\"";
+    scriptLines << "PRIV_DIR=\"/etc/pki/akmods/private\"";
+    scriptLines << "CERT_FILE=\"$CERT_DIR/public_key.der\"";
+    scriptLines << "KEY_FILE=\"$PRIV_DIR/signing_key.pem\"";
+    scriptLines << "PASSWORD=\"" + password + "\"";
+    scriptLines << "";
+    scriptLines << "# 确保目录存在（不删除任何现有文件）";
+    scriptLines << "mkdir -p \"$CERT_DIR\" \"$PRIV_DIR\"";
+    scriptLines << "";
+    scriptLines << "# 如果证书或密钥缺失，则生成新密钥（不会覆盖现有文件）";
+    scriptLines << "if [ ! -f \"$CERT_FILE\" ] || [ ! -f \"$KEY_FILE\" ]; then";
+    scriptLines << "  echo \"Generating new signing key and certificate using kmodgenca -a...\"";
+    scriptLines << "  kmodgenca -a";
+    scriptLines << "else";
+    scriptLines << "  echo \"Existing signing key and certificate found, skipping generation.\"";
+    scriptLines << "fi";
+    scriptLines << "";
+    scriptLines << "# 导入 MOK（若已注册则自动跳过）";
+    scriptLines << "echo \"Importing certificate to MOK...\"";
+    scriptLines << "if printf \"%s\\n%s\\n\" \"$PASSWORD\" \"$PASSWORD\" | mokutil --import \"$CERT_FILE\" 2>&1 | tee /tmp/mok_import.log; then";
+    scriptLines << "  echo \"Import succeeded.\"";
+    scriptLines << "else";
+    scriptLines << "  if grep -qi \"already\" /tmp/mok_import.log; then";
+    scriptLines << "    echo \"Certificate already enrolled, skipping.\"";
+    scriptLines << "  else";
+    scriptLines << "    echo \"Import failed.\"";
+    scriptLines << "    exit 1";
+    scriptLines << "  fi";
+    scriptLines << "fi";
+
     scriptFile.write(scriptLines.join("\n").toUtf8());
     scriptFile.setPermissions(QFileDevice::ExeOwner | QFileDevice::ReadOwner);
     scriptFile.close();
 
     QProcess proc;
+    proc.setProcessChannelMode(QProcess::MergedChannels);
     proc.start("pkexec", {"bash", scriptPath});
     proc.waitForFinished(-1);
 
+    QByteArray output = proc.readAllStandardOutput();
+    QByteArray error = proc.readAllStandardError();
+    QFile logFile("/tmp/nvidia-driver-installer.log");
+    if (logFile.open(QIODevice::Append | QIODevice::Text)) {
+        logFile.write("=== MOK configuration output ===\n");
+        if (!output.isEmpty()) logFile.write(output);
+        if (!error.isEmpty()) logFile.write("ERROR: " + error);
+        logFile.write("=== MOK configuration finished with exit code " +
+                      QByteArray::number(proc.exitCode()) + " ===\n");
+        logFile.close();
+    }
+
     if (proc.exitCode() == 0) {
-        qDebug() << "MOK configured successfully.";
+        qDebug() << "MOK configuration submitted successfully.";
         return true;
     } else {
-        qWarning() << "MOK configuration failed:" << proc.readAllStandardError();
+        qWarning() << "MOK configuration failed:" << error;
         return false;
     }
 }

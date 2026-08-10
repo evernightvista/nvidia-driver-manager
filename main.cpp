@@ -12,10 +12,8 @@ int main(int argc, char *argv[])
     app.setApplicationName(QStringLiteral("nvidia-driver-manager"));
     app.setOrganizationDomain(QStringLiteral("fedoraproject.org"));
 
-    // Set window icon from system theme (Scheme 1)
     app.setWindowIcon(QIcon::fromTheme("nvidia-settings"));
 
-    // Parse --skip command line argument
     QStringList args = app.arguments();
     if (args.contains("--skip")) {
         DriverUtils::setSkipCheck(true);
