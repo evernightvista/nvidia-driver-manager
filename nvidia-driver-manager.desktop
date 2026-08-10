@@ -1,9 +1,19 @@
 [Desktop Entry]
 Type=Application
 Name=NVIDIA Driver Manager
-Name[zh_CN]=NVIDIA 驱动管理器
+Name[zh_CN]=NVIDIA 驱动程序管理器
+Name[zh_TW]=NVIDIA 驅動程式管理員
+Name[ja]=NVIDIA ドライバーマネージャー
+Name[ko]=NVIDIA 드라이버 관리자
+Name[de]=NVIDIA-Treiberverwaltung
+Name[fr]=Gestionnaire de pilotes NVIDIA
 Comment=Manage NVIDIA drivers on Fedora
 Comment[zh_CN]=管理 Fedora 上的 NVIDIA 驱动
+Comment[zh_TW]=在 Fedora 上管理 NVIDIA 驅動程式
+Comment[ja]=Fedora で NVIDIA ドライバーを管理
+Comment[ko]=Fedora에서 NVIDIA 드라이버 관리
+Comment[de]=NVIDIA-Treiber auf Fedora verwalten
+Comment[fr]=Gérer les pilotes NVIDIA sur Fedora
 Exec=nvidia-driver-manager
 Icon=nvidia
 Categories=System;Settings;
