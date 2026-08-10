@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nvidia-driver-manager 1.0\n"
 "Report-Msgid-Bugs-To: your@email.com\n"
-"POT-Creation-Date: 2026-08-09 12:33+0800\n"
+"POT-Creation-Date: 2026-08-10 08:48+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,69 +17,87 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: main.cpp:28 mainwindow.cpp:12
+#: main.cpp:26 mainwindow.cpp:21
 msgid "NVIDIA Driver Manager"
 msgstr ""
 
-#: main.cpp:30
+#: main.cpp:28
 msgid "Manage NVIDIA drivers on Fedora Linux"
 msgstr ""
 
-#: main.cpp:32
+#: main.cpp:30
 msgid "(C) 2027 KairikiFedora"
 msgstr ""
 
-#: mainwindow.cpp:20
-msgid "Detecting GPU..."
-msgstr ""
-
-#: mainwindow.cpp:24
+#: mainwindow.cpp:38
 msgid "Current driver: detecting..."
 msgstr ""
 
-#: mainwindow.cpp:28
+#: mainwindow.cpp:42
 msgid "Select Driver Version"
 msgstr ""
 
-#: mainwindow.cpp:38
+#: mainwindow.cpp:52
 msgid "Configure MOK for Secure Boot (if enabled)"
 msgstr ""
 
-#: mainwindow.cpp:42
+#: mainwindow.cpp:56
 msgid "Install / Switch Driver"
 msgstr ""
 
-#: mainwindow.cpp:58
+#: mainwindow.cpp:76
 msgid "NVIDIA GPU detected ✓"
 msgstr ""
 
-#: mainwindow.cpp:63
+#: mainwindow.cpp:80
 msgid "This computer does not need additional drivers."
 msgstr ""
 
-#: mainwindow.cpp:71
+#: mainwindow.cpp:88
 msgid "Current driver: not installed"
 msgstr ""
 
-#: mainwindow.cpp:73
+#: mainwindow.cpp:90
 msgid "Current driver: %1"
 msgstr ""
 
-#: mainwindow.cpp:99
+#: mainwindow.cpp:113
+msgid "Already Installed"
+msgstr ""
+
+#: mainwindow.cpp:114
+msgid ""
+"The driver version '%1' is already installed.\n"
+"No further action is required."
+msgstr ""
+
+#: mainwindow.cpp:120
+msgid "Different Version Installed"
+msgstr ""
+
+#: mainwindow.cpp:121
+msgid ""
+"You currently have '%1' installed.\n"
+"Installing '%2' will replace it (this will remove the old driver package).\n"
+"\n"
+"Are you sure you want to continue?"
+msgstr ""
+
+#: mainwindow.cpp:136
 msgid "Secure Boot Ignored"
 msgstr ""
 
-#: mainwindow.cpp:100
+#: mainwindow.cpp:137
 msgid ""
 "Secure Boot is enabled, but you chose not to configure MOK.\n"
 "The driver may fail to load after installation."
 msgstr ""
 
-#: mainwindow.cpp:116
+#: mainwindow.cpp:158
 msgid "Confirm Installation"
 msgstr ""
 
-#: mainwindow.cpp:117
+#: mainwindow.cpp:159
 msgid ""
 "The system will install/switch to the following packages:\n"
 "%1\n"
@@ -87,41 +105,74 @@ msgid ""
 "This requires root privileges and may download packages. Continue?"
 msgstr ""
 
-#: mainwindow.cpp:126
-msgid "Authentication Required"
+#: mainwindow.cpp:168
+msgid "Driver Installation Log"
 msgstr ""
 
-#: mainwindow.cpp:127
+#: mainwindow.cpp:177
+msgid "Close"
+msgstr ""
+
+#: mainwindow.cpp:230
+msgid "Failed to start pkexec."
+msgstr ""
+
+#: mainwindow.cpp:277
 msgid ""
-"Administrator privileges are required to install drivers.\n"
-"Operation cancelled."
+"\n"
+"--- Process finished with exit code %1 ---"
 msgstr ""
 
-#: mainwindow.cpp:134
+#: mainwindow.cpp:287
+msgid ""
+"The installation is complete. Please wait about 10 minutes, then restart "
+"your computer and enter the MOK password. Here's how: after restarting, when "
+"the blue screen appears, press any key within 10 seconds, then go through "
+"“Enroll MOK”, “Continue”, “Yes”, and then enter your MOK password. After "
+"that, select “Reboot” to restart your computer. Then, type `lsmod | grep "
+"nvidia` to check if NVIDIA has loaded successfully, and go to KDE System "
+"Settings > About This System to see if your NVIDIA GPU model is displayed. "
+"If the NVIDIA driver didn't load successfully, open the terminal, type sudo "
+"akmods --force, then sudo dracut -v --force, and restart your computer to "
+"complete the installation!"
+msgstr ""
+
+#: mainwindow.cpp:291
+msgid ""
+"The installation is complete. Please wait about 10 minutes, then restart "
+"your computer to start using it！If the NVIDIA driver didn't load "
+"successfully, open the terminal, type sudo akmods --force, then sudo dracut "
+"-v --force, and restart your computer to complete the installation!"
+msgstr ""
+
+#: mainwindow.cpp:294
+msgid ""
+"\n"
+"\n"
+"Installation log saved to:\n"
+"/tmp/nvidia-driver-installer.log"
+msgstr ""
+
+#: mainwindow.cpp:295
 msgid "Success"
 msgstr ""
 
-#: mainwindow.cpp:135
-msgid ""
-"Driver installed successfully.\n"
-"Please reboot to apply changes."
-msgstr ""
-
-#: mainwindow.cpp:138
+#: mainwindow.cpp:297
 msgid "Error"
 msgstr ""
 
-#: mainwindow.cpp:139
+#: mainwindow.cpp:298
 msgid ""
 "Driver installation failed.\n"
-"Check terminal output for details."
+"Check the log for details:\n"
+"/tmp/nvidia-driver-installer.log"
 msgstr ""
 
-#: mainwindow.cpp:152
+#: mainwindow.cpp:316
 msgid "Secure Boot Detected"
 msgstr ""
 
-#: mainwindow.cpp:153
+#: mainwindow.cpp:317
 msgid ""
 "Secure Boot is enabled on this system.\n"
 "NVIDIA drivers must be signed to load.\n"
@@ -129,35 +180,74 @@ msgid ""
 "Do you want to configure Machine Owner Key (MOK) now?"
 msgstr ""
 
-#: mainwindow.cpp:157
+#: mainwindow.cpp:321
 msgid "Configure MOK"
 msgstr ""
 
-#: mainwindow.cpp:158
+#: mainwindow.cpp:322
 msgid "Skip (Install anyway)"
 msgstr ""
 
-#: mainwindow.cpp:168
+#: mainwindow.cpp:331
+msgid "Set MOK Password"
+msgstr ""
+
+#: mainwindow.cpp:332
+msgid ""
+"Please enter a password for the Machine Owner Key (MOK).\n"
+"You will need to enter this password after reboot in the MOK management "
+"interface.\n"
+"Password:"
+msgstr ""
+
+#: mainwindow.cpp:337
+msgid "Password Required"
+msgstr ""
+
+#: mainwindow.cpp:338
+msgid ""
+"MOK configuration cancelled. You can still install the driver, but it may "
+"not load with Secure Boot enabled."
+msgstr ""
+
+#: mainwindow.cpp:343
+msgid "Confirm MOK Password"
+msgstr ""
+
+#: mainwindow.cpp:344
+msgid "Please re-enter the password to confirm:"
+msgstr ""
+
+#: mainwindow.cpp:347
+msgid "Password Mismatch"
+msgstr ""
+
+#: mainwindow.cpp:348
+msgid "Passwords do not match. MOK configuration cancelled."
+msgstr ""
+
+#: mainwindow.cpp:354
 msgid "MOK Configuration Failed"
 msgstr ""
 
-#: mainwindow.cpp:169
+#: mainwindow.cpp:355
 msgid ""
 "Failed to set up MOK. You can still install the driver, but it may not load "
 "with Secure Boot enabled."
 msgstr ""
 
-#: mainwindow.cpp:174
+#: mainwindow.cpp:360
 msgid "MOK Configured"
 msgstr ""
 
-#: mainwindow.cpp:175
+#: mainwindow.cpp:361
 msgid ""
 "The Machine Owner Key has been imported successfully.\n"
 "\n"
 "When you reboot, the MOK management interface will appear.\n"
-"Select 'Enroll MOK' -> 'Continue' -> 'Yes' and enter the password:\n"
-"    nvidia-mok\n"
+"Select 'Enroll MOK' -> 'Continue' -> 'Yes' and enter the password you just "
+"set:\n"
+"    %1\n"
 "\n"
 "After enrolling, the driver will load correctly."
 msgstr ""

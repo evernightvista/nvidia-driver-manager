@@ -11,18 +11,18 @@ msgstr ""
 "PO-Revision-Date: 2026-08-10 10:00+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Evernight Vista Team <13278297951@sina.cn>\n"
-"Language: zh_CN\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: main.cpp:26 mainwindow.cpp:21
 msgid "NVIDIA Driver Manager"
-msgstr "NVIDIA 驱动程序管理器"
+msgstr "Gestionnaire de pilotes NVIDIA"
 
 #: main.cpp:28
 msgid "Manage NVIDIA drivers on Fedora Linux"
-msgstr "在 Fedora Linux 上管理 NVIDIA 驱动程序"
+msgstr "Gérer les pilotes NVIDIA sur Fedora Linux"
 
 #: main.cpp:30
 msgid "(C) 2027 KairikiFedora"
@@ -30,51 +30,51 @@ msgstr "(C) 2027 KairikiFedora"
 
 #: mainwindow.cpp:38
 msgid "Current driver: detecting..."
-msgstr "当前驱动：检测中……"
+msgstr "Pilote actuel : détection…"
 
 #: mainwindow.cpp:42
 msgid "Select Driver Version"
-msgstr "选择驱动程序版本"
+msgstr "Sélectionner la version du pilote"
 
 #: mainwindow.cpp:52
 msgid "Configure MOK for Secure Boot (if enabled)"
-msgstr "为安全启动配置 MOK（如果已启用）"
+msgstr "Configurer MOK pour Secure Boot (si activé)"
 
 #: mainwindow.cpp:56
 msgid "Install / Switch Driver"
-msgstr "安装 / 切换驱动"
+msgstr "Installer / Changer de pilote"
 
 #: mainwindow.cpp:76
 msgid "NVIDIA GPU detected ✓"
-msgstr "检测到 NVIDIA GPU ✓"
+msgstr "GPU NVIDIA détecté ✓"
 
 #: mainwindow.cpp:80
 msgid "This computer does not need additional drivers."
-msgstr "此计算机不需要额外驱动程序。"
+msgstr "Cet ordinateur n'a pas besoin de pilotes supplémentaires."
 
 #: mainwindow.cpp:88
 msgid "Current driver: not installed"
-msgstr "当前驱动：未安装"
+msgstr "Pilote actuel : non installé"
 
 #: mainwindow.cpp:90
 msgid "Current driver: %1"
-msgstr "当前驱动：%1"
+msgstr "Pilote actuel : %1"
 
 #: mainwindow.cpp:113
 msgid "Already Installed"
-msgstr "已安装"
+msgstr "Déjà installé"
 
 #: mainwindow.cpp:114
 msgid ""
 "The driver version '%1' is already installed.\n"
 "No further action is required."
 msgstr ""
-"驱动程序版本“%1”已安装。\n"
-"无需进一步操作。"
+"La version du pilote « %1 » est déjà installée.\n"
+"Aucune action supplémentaire n'est requise."
 
 #: mainwindow.cpp:120
 msgid "Different Version Installed"
-msgstr "已安装不同版本"
+msgstr "Version différente installée"
 
 #: mainwindow.cpp:121
 msgid ""
@@ -83,26 +83,26 @@ msgid ""
 "\n"
 "Are you sure you want to continue?"
 msgstr ""
-"您当前已安装“%1”。\n"
-"安装“%2”将替换它（这将移除旧驱动包）。\n"
+"Vous avez actuellement « %1 » installé.\n"
+"L'installation de « %2 » le remplacera (cela supprimera l'ancien paquet pilote).\n"
 "\n"
-"确定要继续吗？"
+"Êtes-vous sûr de vouloir continuer ?"
 
 #: mainwindow.cpp:136
 msgid "Secure Boot Ignored"
-msgstr "已忽略安全启动"
+msgstr "Secure Boot ignoré"
 
 #: mainwindow.cpp:137
 msgid ""
 "Secure Boot is enabled, but you chose not to configure MOK.\n"
 "The driver may fail to load after installation."
 msgstr ""
-"安全启动已启用，但您选择不配置 MOK。\n"
-"安装后驱动程序可能无法加载。"
+"Secure Boot est activé, mais vous avez choisi de ne pas configurer MOK.\n"
+"Le pilote pourrait ne pas se charger après l'installation."
 
 #: mainwindow.cpp:158
 msgid "Confirm Installation"
-msgstr "确认安装"
+msgstr "Confirmer l'installation"
 
 #: mainwindow.cpp:159
 msgid ""
@@ -111,22 +111,22 @@ msgid ""
 "\n"
 "This requires root privileges and may download packages. Continue?"
 msgstr ""
-"系统将安装/切换到以下软件包：\n"
+"Le système va installer/commuter vers les paquets suivants :\n"
 "%1\n"
 "\n"
-"此操作需要 root 权限，并可能下载软件包。继续吗？"
+"Cela nécessite des privilèges root et peut télécharger des paquets. Continuer ?"
 
 #: mainwindow.cpp:168
 msgid "Driver Installation Log"
-msgstr "驱动程序安装日志"
+msgstr "Journal d'installation du pilote"
 
 #: mainwindow.cpp:177
 msgid "Close"
-msgstr "关闭"
+msgstr "Fermer"
 
 #: mainwindow.cpp:230
 msgid "Failed to start pkexec."
-msgstr "无法启动 pkexec。"
+msgstr "Échec du lancement de pkexec."
 
 #: mainwindow.cpp:277
 msgid ""
@@ -134,7 +134,7 @@ msgid ""
 "--- Process finished with exit code %1 ---"
 msgstr ""
 "\n"
-"--- 进程结束，退出代码 %1 ---"
+"--- Processus terminé avec le code de sortie %1 ---"
 
 #: mainwindow.cpp:287
 msgid ""
@@ -151,7 +151,7 @@ msgid ""
 "complete the installation!"
 msgstr ""
 "\n"
-"安装完成。请等待约 10 分钟，然后重启计算机并输入 MOK 密码。操作步骤如下：重启后，当蓝屏出现时，在 10 秒内按任意键，然后依次选择“Enroll MOK”、“Continue”、“Yes”，接着输入您设置的 MOK 密码。之后选择“Reboot”重启计算机。然后输入 `lsmod | grep nvidia` 检查 NVIDIA 是否加载成功，并前往 KDE 系统设置 > 关于本系统查看是否显示您的 NVIDIA GPU 型号。如果 NVIDIA 驱动未能成功加载，请打开终端，输入 sudo akmods --force，然后 sudo dracut -v --force，再重启计算机以完成安装！"
+"L'installation est terminée. Veuillez attendre environ 10 minutes, puis redémarrer votre ordinateur et saisir le mot de passe MOK. Voici comment faire : après le redémarrage, lorsque l'écran bleu apparaît, appuyez sur une touche dans les 10 secondes, puis suivez « Enroll MOK » → « Continue » → « Yes », puis entrez votre mot de passe MOK. Ensuite, sélectionnez « Reboot » pour redémarrer. Tapez ensuite `lsmod | grep nvidia` pour vérifier si NVIDIA s'est chargé avec succès, et allez dans Paramètres système KDE > À propos de ce système pour voir si votre modèle de GPU NVIDIA s'affiche. Si le pilote NVIDIA ne s'est pas chargé correctement, ouvrez un terminal, tapez sudo akmods --force, puis sudo dracut -v --force, et redémarrez votre ordinateur pour terminer l'installation !"
 
 #: mainwindow.cpp:291
 msgid ""
@@ -160,7 +160,7 @@ msgid ""
 "successfully, open the terminal, type sudo akmods --force, then sudo dracut "
 "-v --force, and restart your computer to complete the installation!"
 msgstr ""
-"安装完成。请等待约 10 分钟，然后重启计算机即可开始使用！如果 NVIDIA 驱动未能成功加载，请打开终端，输入 sudo akmods --force，然后 sudo dracut -v --force，再重启计算机以完成安装！"
+"L'installation est terminée. Veuillez attendre environ 10 minutes, puis redémarrer votre ordinateur pour commencer à l'utiliser ！Si le pilote NVIDIA ne s'est pas chargé correctement, ouvrez un terminal, tapez sudo akmods --force, puis sudo dracut -v --force, et redémarrez votre ordinateur pour terminer l'installation !"
 
 #: mainwindow.cpp:294
 msgid ""
@@ -171,16 +171,16 @@ msgid ""
 msgstr ""
 "\n"
 "\n"
-"安装日志已保存至：\n"
+"Journal d'installation enregistré dans :\n"
 "/tmp/nvidia-driver-installer.log"
 
 #: mainwindow.cpp:295
 msgid "Success"
-msgstr "成功"
+msgstr "Succès"
 
 #: mainwindow.cpp:297
 msgid "Error"
-msgstr "错误"
+msgstr "Erreur"
 
 #: mainwindow.cpp:298
 msgid ""
@@ -188,13 +188,13 @@ msgid ""
 "Check the log for details:\n"
 "/tmp/nvidia-driver-installer.log"
 msgstr ""
-"驱动程序安装失败。\n"
-"查看日志了解详情：\n"
+"L'installation du pilote a échoué.\n"
+"Consultez le journal pour plus de détails :\n"
 "/tmp/nvidia-driver-installer.log"
 
 #: mainwindow.cpp:316
 msgid "Secure Boot Detected"
-msgstr "检测到安全启动"
+msgstr "Secure Boot détecté"
 
 #: mainwindow.cpp:317
 msgid ""
@@ -203,22 +203,22 @@ msgid ""
 "\n"
 "Do you want to configure Machine Owner Key (MOK) now?"
 msgstr ""
-"此系统已启用安全启动。\n"
-"NVIDIA 驱动程序需要签名才能加载。\n"
+"Secure Boot est activé sur ce système.\n"
+"Les pilotes NVIDIA doivent être signés pour être chargés.\n"
 "\n"
-"是否现在配置机器所有者密钥（MOK）？"
+"Souhaitez-vous configurer la clé Machine Owner Key (MOK) maintenant ?"
 
 #: mainwindow.cpp:321
 msgid "Configure MOK"
-msgstr "配置 MOK"
+msgstr "Configurer MOK"
 
 #: mainwindow.cpp:322
 msgid "Skip (Install anyway)"
-msgstr "跳过（仍安装）"
+msgstr "Ignorer (installer quand même)"
 
 #: mainwindow.cpp:331
 msgid "Set MOK Password"
-msgstr "设置 MOK 密码"
+msgstr "Définir le mot de passe MOK"
 
 #: mainwindow.cpp:332
 msgid ""
@@ -227,51 +227,51 @@ msgid ""
 "interface.\n"
 "Password:"
 msgstr ""
-"请为机器所有者密钥（MOK）输入一个密码。\n"
-"重启后您需要在 MOK 管理界面中输入此密码。\n"
-"密码："
+"Veuillez saisir un mot de passe pour la clé Machine Owner Key (MOK).\n"
+"Vous devrez saisir ce mot de passe après le redémarrage dans l'interface de gestion MOK.\n"
+"Mot de passe :"
 
 #: mainwindow.cpp:337
 msgid "Password Required"
-msgstr "需要密码"
+msgstr "Mot de passe requis"
 
 #: mainwindow.cpp:338
 msgid ""
 "MOK configuration cancelled. You can still install the driver, but it may "
 "not load with Secure Boot enabled."
 msgstr ""
-"已取消 MOK 配置。您仍可安装驱动，但在安全启动启用时可能无法加载。"
+"Configuration MOK annulée. Vous pouvez toujours installer le pilote, mais il pourrait ne pas se charger avec Secure Boot activé."
 
 #: mainwindow.cpp:343
 msgid "Confirm MOK Password"
-msgstr "确认 MOK 密码"
+msgstr "Confirmer le mot de passe MOK"
 
 #: mainwindow.cpp:344
 msgid "Please re-enter the password to confirm:"
-msgstr "请重新输入密码以确认："
+msgstr "Veuillez ressaisir le mot de passe pour confirmer :"
 
 #: mainwindow.cpp:347
 msgid "Password Mismatch"
-msgstr "密码不匹配"
+msgstr "Mot de passe non correspondant"
 
 #: mainwindow.cpp:348
 msgid "Passwords do not match. MOK configuration cancelled."
-msgstr "密码不匹配。MOK 配置已取消。"
+msgstr "Les mots de passe ne correspondent pas. Configuration MOK annulée."
 
 #: mainwindow.cpp:354
 msgid "MOK Configuration Failed"
-msgstr "MOK 配置失败"
+msgstr "Échec de la configuration MOK"
 
 #: mainwindow.cpp:355
 msgid ""
 "Failed to set up MOK. You can still install the driver, but it may not load "
 "with Secure Boot enabled."
 msgstr ""
-"设置 MOK 失败。您仍可安装驱动，但在安全启动启用时可能无法加载。"
+"Échec de la configuration de MOK. Vous pouvez toujours installer le pilote, mais il pourrait ne pas se charger avec Secure Boot activé."
 
 #: mainwindow.cpp:360
 msgid "MOK Configured"
-msgstr "MOK 已配置"
+msgstr "MOK configuré"
 
 #: mainwindow.cpp:361
 msgid ""
@@ -284,10 +284,10 @@ msgid ""
 "\n"
 "After enrolling, the driver will load correctly."
 msgstr ""
-"机器所有者密钥已成功导入。\n"
+"La clé Machine Owner Key a été importée avec succès.\n"
 "\n"
-"重启后，MOK 管理界面将会出现。\n"
-"依次选择“Enroll MOK” -> “Continue” -> “Yes”，然后输入您刚刚设置的密码：\n"
+"Au redémarrage, l'interface de gestion MOK apparaîtra.\n"
+"Sélectionnez « Enroll MOK » → « Continue » → « Yes » et saisissez le mot de passe que vous venez de définir :\n"
 "    %1\n"
 "\n"
-"注册完成后，驱动程序将正常加载。"
+"Après l'enregistrement, le pilote se chargera correctement."

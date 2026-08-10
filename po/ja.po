@@ -1,139 +1,202 @@
-# Japanese translation for nvidia-driver-manager.
-# Copyright (C) 2025 Your Name
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the nvidia-driver-manager package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: nvidia-driver-manager 1.0\n"
 "Report-Msgid-Bugs-To: your@email.com\n"
-"POT-Creation-Date: 2026-08-09 12:15+0800\n"
-"PO-Revision-Date: 2026-08-09 12:30+0800\n"
-"Last-Translator: YOUR NAME <EMAIL@ADDRESS>\n"
-"Language-Team: KairikiFedora Software Team <13278297951@sina.cn>\n"
+"POT-Creation-Date: 2026-08-10 08:48+0800\n"
+"PO-Revision-Date: 2026-08-10 10:00+0800\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Evernight Vista Team <13278297951@sina.cn>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
 
-#: main.cpp:24 mainwindow.cpp:12
+#: main.cpp:26 mainwindow.cpp:21
 msgid "NVIDIA Driver Manager"
-msgstr "NVIDIA ドライバマネージャー"
-
-#: main.cpp:26
-msgid "Manage NVIDIA drivers on Fedora Linux"
-msgstr "Fedora Linux で NVIDIA ドライバを管理"
+msgstr "NVIDIA ドライバーマネージャー"
 
 #: main.cpp:28
+msgid "Manage NVIDIA drivers on Fedora Linux"
+msgstr "Fedora Linux で NVIDIA ドライバーを管理"
+
+#: main.cpp:30
 msgid "(C) 2027 KairikiFedora"
 msgstr "(C) 2027 KairikiFedora"
 
-#: mainwindow.cpp:20
-msgid "Detecting GPU..."
-msgstr "GPU を検出中…"
-
-#: mainwindow.cpp:24
-msgid "Current driver: detecting..."
-msgstr "現在のドライバ：検出中…"
-
-#: mainwindow.cpp:28
-msgid "Select Driver Version"
-msgstr "ドライババージョンを選択"
-
 #: mainwindow.cpp:38
-msgid "Configure MOK for Secure Boot (if enabled)"
-msgstr "セキュアブートの MOK を設定（有効な場合）"
+msgid "Current driver: detecting..."
+msgstr "現在のドライバー：検出中…"
 
 #: mainwindow.cpp:42
+msgid "Select Driver Version"
+msgstr "ドライバーバージョンを選択"
+
+#: mainwindow.cpp:52
+msgid "Configure MOK for Secure Boot (if enabled)"
+msgstr "セキュアブート用 MOK を設定（有効な場合）"
+
+#: mainwindow.cpp:56
 msgid "Install / Switch Driver"
-msgstr "ドライバのインストール/切り替え"
+msgstr "インストール／切り替え"
 
-#: mainwindow.cpp:58
+#: mainwindow.cpp:76
 msgid "NVIDIA GPU detected ✓"
-msgstr "NVIDIA GPU が検出されました ✓"
+msgstr "NVIDIA GPU を検出 ✓"
 
-#: mainwindow.cpp:63
+#: mainwindow.cpp:80
 msgid "This computer does not need additional drivers."
-msgstr "このコンピュータには追加のドライバは必要ありません。"
+msgstr "このコンピューターには追加ドライバーは不要です。"
 
-#: mainwindow.cpp:71
+#: mainwindow.cpp:88
 msgid "Current driver: not installed"
-msgstr "現在のドライバ：インストールされていません"
+msgstr "現在のドライバー：未インストール"
 
-#: mainwindow.cpp:73
+#: mainwindow.cpp:90
 msgid "Current driver: %1"
-msgstr "現在のドライバ：%1"
+msgstr "現在のドライバー：%1"
 
-#: mainwindow.cpp:99
+#: mainwindow.cpp:113
+msgid "Already Installed"
+msgstr "インストール済み"
+
+#: mainwindow.cpp:114
+msgid ""
+"The driver version '%1' is already installed.\n"
+"No further action is required."
+msgstr ""
+"ドライバーバージョン「%1」は既にインストールされています。\n"
+"追加の操作は不要です。"
+
+#: mainwindow.cpp:120
+msgid "Different Version Installed"
+msgstr "異なるバージョンがインストール済み"
+
+#: mainwindow.cpp:121
+msgid ""
+"You currently have '%1' installed.\n"
+"Installing '%2' will replace it (this will remove the old driver package).\n"
+"\n"
+"Are you sure you want to continue?"
+msgstr ""
+"現在「%1」がインストールされています。\n"
+"「%2」をインストールすると置き換えられます（古いドライバーパッケージは削除されます）。\n"
+"\n"
+"続行してもよろしいですか？"
+
+#: mainwindow.cpp:136
 msgid "Secure Boot Ignored"
 msgstr "セキュアブートを無視"
 
-#: mainwindow.cpp:100
+#: mainwindow.cpp:137
 msgid ""
 "Secure Boot is enabled, but you chose not to configure MOK.\n"
 "The driver may fail to load after installation."
 msgstr ""
 "セキュアブートが有効ですが、MOK を設定しないことを選択しました。\n"
-"ドライバがインストール後にロードに失敗する可能性があります。"
+"インストール後にドライバーが読み込まれない可能性があります。"
 
-#: mainwindow.cpp:116
+#: mainwindow.cpp:158
 msgid "Confirm Installation"
 msgstr "インストールの確認"
 
-#: mainwindow.cpp:117
+#: mainwindow.cpp:159
 msgid ""
 "The system will install/switch to the following packages:\n"
 "%1\n"
 "\n"
 "This requires root privileges and may download packages. Continue?"
 msgstr ""
-"システムは以下のパッケージをインストール/切り替えます：\n"
+"システムは以下のパッケージをインストール／切り替えします：\n"
 "%1\n"
 "\n"
-"これには root 権限が必要で、パッケージをダウンロードする場合があります。続行しますか？"
+"これには root 権限が必要で、パッケージのダウンロードが発生する場合があります。続行しますか？"
 
-#: mainwindow.cpp:126
-msgid "Authentication Required"
-msgstr "認証が必要"
+#: mainwindow.cpp:168
+msgid "Driver Installation Log"
+msgstr "ドライバーインストールログ"
 
-#: mainwindow.cpp:127
+#: mainwindow.cpp:177
+msgid "Close"
+msgstr "閉じる"
+
+#: mainwindow.cpp:230
+msgid "Failed to start pkexec."
+msgstr "pkexec の起動に失敗しました。"
+
+#: mainwindow.cpp:277
 msgid ""
-"Administrator privileges are required to install drivers.\n"
-"Operation cancelled."
+"\n"
+"--- Process finished with exit code %1 ---"
 msgstr ""
-"ドライバをインストールするには管理者権限が必要です。\n"
-"操作がキャンセルされました。"
+"\n"
+"--- プロセス終了（終了コード %1）---"
 
-#: mainwindow.cpp:134
+#: mainwindow.cpp:287
+msgid ""
+"\n"
+"The installation is complete. Please wait about 10 minutes, then restart "
+"your computer and enter the MOK password. Here's how: after restarting, when "
+"the blue screen appears, press any key within 10 seconds, then go through "
+"“Enroll MOK”, “Continue”, “Yes”, and then enter your MOK password. After "
+"that, select “Reboot” to restart your computer. Then, type `lsmod | grep "
+"nvidia` to check if NVIDIA has loaded successfully, and go to KDE System "
+"Settings > About This System to see if your NVIDIA GPU model is displayed. "
+"If the NVIDIA driver didn't load successfully, open the terminal, type sudo "
+"akmods --force, then sudo dracut -v --force, and restart your computer to "
+"complete the installation!"
+msgstr ""
+"\n"
+"インストールが完了しました。約10分待ってから、コンピューターを再起動し、MOK パスワードを入力してください。手順：再起動後、青い画面が表示されたら10秒以内に何かキーを押し、「Enroll MOK」→「Continue」→「Yes」と進み、設定した MOK パスワードを入力します。その後「Reboot」を選択して再起動します。再起動後、`lsmod | grep nvidia` で NVIDIA が読み込まれたか確認し、KDE システム設定 > このシステムについて で NVIDIA GPU モデルが表示されるか確認してください。NVIDIA ドライバーが正常に読み込まれなかった場合は、ターミナルを開いて sudo akmods --force、次に sudo dracut -v --force を実行し、再起動してインストールを完了させてください！"
+
+#: mainwindow.cpp:291
+msgid ""
+"The installation is complete. Please wait about 10 minutes, then restart "
+"your computer to start using it！If the NVIDIA driver didn't load "
+"successfully, open the terminal, type sudo akmods --force, then sudo dracut "
+"-v --force, and restart your computer to complete the installation!"
+msgstr ""
+"インストールが完了しました。約10分待ってからコンピューターを再起動して使用を開始してください！NVIDIA ドライバーが正常に読み込まれなかった場合は、ターミナルを開いて sudo akmods --force、次に sudo dracut -v --force を実行し、再起動してインストールを完了させてください！"
+
+#: mainwindow.cpp:294
+msgid ""
+"\n"
+"\n"
+"Installation log saved to:\n"
+"/tmp/nvidia-driver-installer.log"
+msgstr ""
+"\n"
+"\n"
+"インストールログは以下に保存されました：\n"
+"/tmp/nvidia-driver-installer.log"
+
+#: mainwindow.cpp:295
 msgid "Success"
 msgstr "成功"
 
-#: mainwindow.cpp:135
-msgid ""
-"Driver installed successfully.\n"
-"Please reboot to apply changes."
-msgstr ""
-"ドライバが正常にインストールされました。\n"
-"変更を適用するには再起動してください。"
-
-#: mainwindow.cpp:138
+#: mainwindow.cpp:297
 msgid "Error"
 msgstr "エラー"
 
-#: mainwindow.cpp:139
+#: mainwindow.cpp:298
 msgid ""
 "Driver installation failed.\n"
-"Check terminal output for details."
+"Check the log for details:\n"
+"/tmp/nvidia-driver-installer.log"
 msgstr ""
-"ドライバのインストールに失敗しました。\n"
-"詳細はターミナル出力を確認してください。"
+"ドライバーのインストールに失敗しました。\n"
+"詳細はログを確認してください：\n"
+"/tmp/nvidia-driver-installer.log"
 
-#: mainwindow.cpp:152
+#: mainwindow.cpp:316
 msgid "Secure Boot Detected"
-msgstr "セキュアブートが検出されました"
+msgstr "セキュアブートを検出"
 
-#: mainwindow.cpp:153
+#: mainwindow.cpp:317
 msgid ""
 "Secure Boot is enabled on this system.\n"
 "NVIDIA drivers must be signed to load.\n"
@@ -141,47 +204,90 @@ msgid ""
 "Do you want to configure Machine Owner Key (MOK) now?"
 msgstr ""
 "このシステムではセキュアブートが有効です。\n"
-"NVIDIA ドライバをロードするには署名が必要です。\n"
+"NVIDIA ドライバーを読み込むには署名が必要です。\n"
 "\n"
-"今すぐマシン所有者キー (MOK) を設定しますか？"
+"今すぐ Machine Owner Key (MOK) を設定しますか？"
 
-#: mainwindow.cpp:157
+#: mainwindow.cpp:321
 msgid "Configure MOK"
 msgstr "MOK を設定"
 
-#: mainwindow.cpp:158
+#: mainwindow.cpp:322
 msgid "Skip (Install anyway)"
 msgstr "スキップ（とにかくインストール）"
 
-#: mainwindow.cpp:168
+#: mainwindow.cpp:331
+msgid "Set MOK Password"
+msgstr "MOK パスワードを設定"
+
+#: mainwindow.cpp:332
+msgid ""
+"Please enter a password for the Machine Owner Key (MOK).\n"
+"You will need to enter this password after reboot in the MOK management "
+"interface.\n"
+"Password:"
+msgstr ""
+"Machine Owner Key (MOK) のパスワードを入力してください。\n"
+"再起動後に MOK 管理インターフェースでこのパスワードを入力する必要があります。\n"
+"パスワード："
+
+#: mainwindow.cpp:337
+msgid "Password Required"
+msgstr "パスワードが必要"
+
+#: mainwindow.cpp:338
+msgid ""
+"MOK configuration cancelled. You can still install the driver, but it may "
+"not load with Secure Boot enabled."
+msgstr ""
+"MOK 設定がキャンセルされました。ドライバーのインストールは引き続き可能ですが、セキュアブート有効時には読み込まれない可能性があります。"
+
+#: mainwindow.cpp:343
+msgid "Confirm MOK Password"
+msgstr "MOK パスワードを確認"
+
+#: mainwindow.cpp:344
+msgid "Please re-enter the password to confirm:"
+msgstr "確認のためパスワードを再入力してください："
+
+#: mainwindow.cpp:347
+msgid "Password Mismatch"
+msgstr "パスワードが一致しません"
+
+#: mainwindow.cpp:348
+msgid "Passwords do not match. MOK configuration cancelled."
+msgstr "パスワードが一致しません。MOK 設定はキャンセルされました。"
+
+#: mainwindow.cpp:354
 msgid "MOK Configuration Failed"
 msgstr "MOK 設定に失敗"
 
-#: mainwindow.cpp:169
+#: mainwindow.cpp:355
 msgid ""
 "Failed to set up MOK. You can still install the driver, but it may not load "
 "with Secure Boot enabled."
 msgstr ""
-"MOK の設定に失敗しました。ドライバのインストールは引き続き可能ですが、セキュアブートが有効な場合はロードされない可能性があります。"
+"MOK の設定に失敗しました。ドライバーのインストールは引き続き可能ですが、セキュアブート有効時には読み込まれない可能性があります。"
 
-#: mainwindow.cpp:174
+#: mainwindow.cpp:360
 msgid "MOK Configured"
 msgstr "MOK が設定されました"
 
-#: mainwindow.cpp:175
+#: mainwindow.cpp:361
 msgid ""
 "The Machine Owner Key has been imported successfully.\n"
 "\n"
 "When you reboot, the MOK management interface will appear.\n"
-"Select 'Enroll MOK' -> 'Continue' -> 'Yes' and enter the password:\n"
-"    nvidia-mok\n"
+"Select 'Enroll MOK' -> 'Continue' -> 'Yes' and enter the password you just "
+"set:\n"
+"    %1\n"
 "\n"
 "After enrolling, the driver will load correctly."
 msgstr ""
-"マシン所有者キーが正常にインポートされました。\n"
+"Machine Owner Key が正常にインポートされました。\n"
 "\n"
-"再起動すると、MOK 管理インターフェースが表示されます。\n"
-"「Enroll MOK」→「Continue」→「Yes」を選択し、パスワードを入力してください：\n"
-"    nvidia-mok\n"
+"再起動すると MOK 管理インターフェースが表示されます。\n"
+"「Enroll MOK」→「Continue」→「Yes」と選択し、設定したパスワードを入力してください：\n"
+"    %1\n"
 "\n"
-"登録後、ドライバは正しくロードされます。"
+"登録後、ドライバーは正しく読み込まれます。"
