@@ -55,5 +55,5 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/nvidia-driver-manager
 %{_datadir}/applications/nvidia-driver-manager.desktop
 
 %changelog
-* Thu Aug 06 2026 Your Name <your@email.com> - 1.0-1
-- Initial release with Secure Boot MOK support and Polkit pre-authorization
+* Mon Aug 10 2026 KairikiFedora <13278297951@sina.cn> - 1.0.0-1
+- Initial release
