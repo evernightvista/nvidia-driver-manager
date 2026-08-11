@@ -1,0 +1,233 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: nvidia-driver-manager 2.0.0\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "NVIDIA Driver Manager"
+msgstr "NVIDIA ドライバーマネージャー"
+
+msgid "Manage NVIDIA drivers on Fedora Linux"
+msgstr "Fedora Linux 上の NVIDIA ドライバーを管理"
+
+msgid "(C) 2027 KairikiFedora"
+msgstr "(C) 2027 KairikiFedora"
+
+msgid "Current driver: detecting..."
+msgstr "現在のドライバー: 検出中..."
+
+msgid "Select Driver Version"
+msgstr "ドライバーバージョンを選択"
+
+msgid "Configure MOK for Secure Boot (if enabled)"
+msgstr "セキュアブート用の MOK を設定 (有効な場合)"
+
+msgid "Install / Switch Driver"
+msgstr "ドライバーのインストール / 切り替え"
+
+msgid "NVIDIA GPU detected"
+msgstr "NVIDIA GPU が検出されました"
+
+msgid "This computer does not need additional NVIDIA drivers."
+msgstr "このコンピューターには追加の NVIDIA ドライバーは不要です。"
+
+msgid "Current driver: not installed"
+msgstr "現在のドライバー: インストールされていません"
+
+msgid "Current driver: %1"
+msgstr "現在のドライバー: %1"
+
+msgid "NVIDIA driver package '%1' is already installed. No action is needed unless you want to switch versions."
+msgstr "NVIDIA ドライバーパッケージ '%1' はすでにインストールされています。バージョンを切り替えたい場合を除き、操作は不要です。"
+
+msgid "Display server: %1"
+msgstr "ディスプレイサーバー: %1"
+
+msgid "MOK Configuration Log"
+msgstr "MOK 設定ログ"
+
+msgid "Close"
+msgstr "閉じる"
+
+msgid "Error: Cannot create temporary directory."
+msgstr "エラー: 一時ディレクトリを作成できません。"
+
+msgid "Error: Cannot write temporary script."
+msgstr "エラー: 一時スクリプトを書き込めません。"
+
+msgid "Failed to start pkexec."
+msgstr "pkexec の起動に失敗しました。"
+
+msgid "\n--- MOK configuration finished with exit code %1 ---"
+msgstr "\n--- MOK 設定が終了コード %1 で完了しました ---"
+
+msgid "MOK configuration completed successfully."
+msgstr "MOK 設定が正常に完了しました。"
+
+msgid "MOK configuration failed. Please check the log for details."
+msgstr "MOK 設定に失敗しました。詳細はログを確認してください。"
+
+msgid "MOK Already Configured"
+msgstr "MOK はすでに設定済み"
+
+msgid ""
+"The MOK certificate is already enrolled.\n"
+"No further MOK configuration is needed."
+msgstr ""
+"MOK 証明書はすでに登録されています。\n"
+"これ以上の MOK 設定は不要です。"
+
+msgid "Secure Boot Detected"
+msgstr "セキュアブートが検出されました"
+
+msgid ""
+"Secure Boot is enabled on this system.\n"
+"NVIDIA drivers must be signed to load.\n"
+"\n"
+"Do you want to configure Machine Owner Key (MOK) now?"
+msgstr ""
+"このシステムではセキュアブートが有効になっています。\n"
+"NVIDIA ドライバーを読み込むには署名が必要です。\n"
+"\n"
+"今すぐ Machine Owner Key (MOK) を設定しますか?"
+
+msgid "Configure MOK"
+msgstr "MOK を設定"
+
+msgid "Skip (Install anyway)"
+msgstr "スキップ (そのままインストール)"
+
+msgid "Set MOK Password"
+msgstr "MOK パスワードの設定"
+
+msgid ""
+"Please enter a password for the Machine Owner Key (MOK).\n"
+"You will need to enter this password after reboot in the MOK management interface.\n"
+"Password:"
+msgstr ""
+"Machine Owner Key (MOK) のパスワードを入力してください。\n"
+"再起動後、MOK 管理インターフェースでこのパスワードを入力する必要があります。\n"
+"パスワード:"
+
+msgid "Password Required"
+msgstr "パスワードが必要です"
+
+msgid "MOK configuration cancelled. You can still install the driver, but it may not load with Secure Boot enabled."
+msgstr "MOK 設定がキャンセルされました。ドライバーのインストールは引き続き可能ですが、セキュアブートが有効な場合は読み込まれない可能性があります。"
+
+msgid "Confirm MOK Password"
+msgstr "MOK パスワードの確認"
+
+msgid "Please re-enter the password to confirm:"
+msgstr "確認のため、パスワードを再入力してください:"
+
+msgid "Password Mismatch"
+msgstr "パスワードが一致しません"
+
+msgid "Passwords do not match. MOK configuration cancelled."
+msgstr "パスワードが一致しません。MOK 設定がキャンセルされました。"
+
+msgid "Already Installed"
+msgstr "すでにインストール済み"
+
+msgid ""
+"The driver version '%1' is already installed.\n"
+"No further action is required."
+msgstr ""
+"ドライバーバージョン '%1' はすでにインストールされています。\n"
+"これ以上の操作は不要です。"
+
+msgid "Different Version Installed"
+msgstr "別のバージョンがインストールされています"
+
+msgid ""
+"You currently have '%1' installed.\n"
+"Installing '%2' will replace it (this will remove the old driver package).\n"
+"\n"
+"Are you sure you want to continue?"
+msgstr ""
+"現在 '%1' がインストールされています。\n"
+"'%2' をインストールすると置き換えられます (古いドライバーパッケージは削除されます)。\n"
+"\n"
+"続行しますか?"
+
+msgid "Secure Boot Ignored"
+msgstr "セキュアブートが無視されました"
+
+msgid ""
+"Secure Boot is enabled, but you chose not to configure MOK.\n"
+"The driver may fail to load after installation."
+msgstr ""
+"セキュアブートが有効ですが、MOK を設定しないことが選択されました。\n"
+"インストール後、ドライバーが読み込まれない可能性があります。"
+
+msgid "Confirm Installation"
+msgstr "インストールの確認"
+
+msgid ""
+"The system will install/switch to the following packages:\n"
+"%1\n"
+"\n"
+"This requires root privileges and may download packages. Continue?"
+msgstr ""
+"システムは以下のパッケージをインストール/切り替えします:\n"
+"%1\n"
+"\n"
+"これには root 権限が必要で、パッケージをダウンロードする可能性があります。続行しますか?"
+
+msgid "Driver Installation Log"
+msgstr "ドライバーインストールログ"
+
+msgid "\n--- Process finished with exit code %1 ---"
+msgstr "\n--- プロセスが終了コード %1 で終了しました ---"
+
+msgid "The installation is complete. Please wait about 10 minutes, then restart your computer and enter the MOK password. Here's how: after restarting, when the blue screen appears, press any key within 10 seconds, then go through Enroll MOK, Continue, Yes, and then enter your MOK password. After that, select Reboot to restart your computer. Then, type `lsmod | grep nvidia` to check if NVIDIA has loaded successfully, and go to KDE System Settings > About This System to see if your NVIDIA GPU model is displayed. If the NVIDIA driver didn't load successfully, open the terminal, type sudo akmods --force, then sudo dracut -v --force, and restart your computer to complete the installation!"
+msgstr "インストールが完了しました。約10分間お待ちいただいてから、コンピューターを再起動し、MOK パスワードを入力してください。手順は次のとおりです: 再起動後、青い画面が表示されたら10秒以内に任意のキーを押し、Enroll MOK、Continue、Yes と進み、MOK パスワードを入力してください。その後、Reboot を選択してコンピューターを再起動してください。次に、`lsmod | grep nvidia` と入力して NVIDIA が正常に読み込まれたか確認し、KDE システム設定 > このシステムについて に移動して NVIDIA GPU モデルが表示されているか確認してください。NVIDIA ドライバーが正常に読み込まれなかった場合は、ターミナルを開き、sudo akmods --force と入力し、続けて sudo dracut -v --force と入力して、コンピューターを再起動すればインストールは完了です!"
+
+msgid "The installation is complete. Please wait about 10 minutes, then restart your computer to start using it! If the NVIDIA driver didn't load successfully, open the terminal, type sudo akmods --force, then sudo dracut -v --force, and restart your computer to complete the installation!"
+msgstr "インストールが完了しました。約10分間お待ちいただいてから、コンピューターを再起動してご利用ください! NVIDIA ドライバーが正常に読み込まれなかった場合は、ターミナルを開き、sudo akmods --force と入力し、続けて sudo dracut -v --force と入力して、コンピューターを再起動すればインストールは完了です!"
+
+msgid "\n\nInstallation log saved to:\n%1"
+msgstr "\n\nインストールログは次の場所に保存されました:\n%1"
+
+msgid "Success"
+msgstr "成功"
+
+msgid "Error"
+msgstr "エラー"
+
+msgid ""
+"Driver installation failed.\n"
+"Check the log for details:\n"
+"%1"
+msgstr ""
+"ドライバーのインストールに失敗しました。\n"
+"詳細はログを確認してください:\n"
+"%1"
+
+msgid "MOK Configuration Complete"
+msgstr "MOK 設定完了"
+
+msgid ""
+"MOK key generation and certificate import have been completed.\n"
+"\n"
+"Please remember the MOK password you set earlier. After reboot, "
+"the MOK management interface (blue screen) will appear. You must "
+"enter this password to enroll the key:\n"
+"\n"
+"    %1\n"
+"\n"
+"Steps: Enroll MOK -> Continue -> Yes -> enter password -> Reboot."
+msgstr ""
+"MOK 鍵生成と証明書のインポートが完了しました。\n"
+"\n"
+"先ほど設定した MOK パスワードを覚えておいてください。"
+"再起動後、MOK 管理インターフェース（青い画面）が表示されます。"
+"キーを登録するためにこのパスワードを入力する必要があります:\n"
+"\n"
+"    %1\n"
+"\n"
+"手順: Enroll MOK -> Continue -> Yes -> パスワード入力 -> Reboot。"

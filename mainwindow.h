@@ -34,18 +34,22 @@ private:
     bool ensureSecureBootConfigured();
     void startMokConfiguration(const QString &password);
 
-    KMessageWidget *gpuMessage;
-    QLabel *currentVersionLabel;
-    QComboBox *driverCombo;
+    KMessageWidget *gpuMessage;         // GPU 检测结果
+    KMessageWidget *driverMessage;      // 已安装驱动提示
+    QLabel *currentVersionLabel;        // 当前驱动版本
+    QLabel *sessionLabel;               // Wayland / X11 会话类型
+    QComboBox *driverCombo;             // 驱动版本选择
     QPushButton *installButton;
-    QCheckBox *secureBootCheckBox;
+    QCheckBox *secureBootCheckBox;      // 安全启动 MOK 复选框
 
+    // 安装进程
     QProcess *installProcess;
     QDialog *logDialog;
     QTextEdit *logEdit;
     QPushButton *closeButton;
     QStringList packagesToInstall;
     QFile *logFile;
+    QTemporaryDir *installTempDir;
 
     // MOK 配置专用
     QProcess *mokProcess;
@@ -53,6 +57,7 @@ private:
     QTextEdit *mokLogEdit;
     QPushButton *mokCloseButton;
     QString mokPassword;
+    bool configureMokDuringInstall;
     bool mokInProgress;
     QTemporaryDir *mokTempDir;
     bool mokSuccess;   // 记录 MOK 配置结果

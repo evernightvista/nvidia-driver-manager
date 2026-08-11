@@ -1,0 +1,233 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: nvidia-driver-manager 2.0.0\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "NVIDIA Driver Manager"
+msgstr "NVIDIA Treiber-Manager"
+
+msgid "Manage NVIDIA drivers on Fedora Linux"
+msgstr "NVIDIA-Treiber unter Fedora Linux verwalten"
+
+msgid "(C) 2027 KairikiFedora"
+msgstr "(C) 2027 KairikiFedora"
+
+msgid "Current driver: detecting..."
+msgstr "Aktueller Treiber: wird ermittelt..."
+
+msgid "Select Driver Version"
+msgstr "Treiber-Version auswählen"
+
+msgid "Configure MOK for Secure Boot (if enabled)"
+msgstr "MOK für Secure Boot konfigurieren (falls aktiviert)"
+
+msgid "Install / Switch Driver"
+msgstr "Treiber installieren / wechseln"
+
+msgid "NVIDIA GPU detected"
+msgstr "NVIDIA-GPU erkannt"
+
+msgid "This computer does not need additional NVIDIA drivers."
+msgstr "Dieser Computer benötigt keine zusätzlichen NVIDIA-Treiber."
+
+msgid "Current driver: not installed"
+msgstr "Aktueller Treiber: nicht installiert"
+
+msgid "Current driver: %1"
+msgstr "Aktueller Treiber: %1"
+
+msgid "NVIDIA driver package '%1' is already installed. No action is needed unless you want to switch versions."
+msgstr "Das NVIDIA-Treiberpaket '%1' ist bereits installiert. Es ist keine Aktion erforderlich, es sei denn, Sie möchten die Version wechseln."
+
+msgid "Display server: %1"
+msgstr "Anzeige-Server: %1"
+
+msgid "MOK Configuration Log"
+msgstr "MOK-Konfigurationsprotokoll"
+
+msgid "Close"
+msgstr "Schließen"
+
+msgid "Error: Cannot create temporary directory."
+msgstr "Fehler: Temporäres Verzeichnis konnte nicht erstellt werden."
+
+msgid "Error: Cannot write temporary script."
+msgstr "Fehler: Temporäres Skript konnte nicht geschrieben werden."
+
+msgid "Failed to start pkexec."
+msgstr "pkexec konnte nicht gestartet werden."
+
+msgid "\n--- MOK configuration finished with exit code %1 ---"
+msgstr "\n--- MOK-Konfiguration mit Exit-Code %1 abgeschlossen ---"
+
+msgid "MOK configuration completed successfully."
+msgstr "MOK-Konfiguration erfolgreich abgeschlossen."
+
+msgid "MOK configuration failed. Please check the log for details."
+msgstr "MOK-Konfiguration fehlgeschlagen. Bitte überprüfen Sie das Protokoll für Details."
+
+msgid "MOK Already Configured"
+msgstr "MOK bereits konfiguriert"
+
+msgid ""
+"The MOK certificate is already enrolled.\n"
+"No further MOK configuration is needed."
+msgstr ""
+"Das MOK-Zertifikat ist bereits registriert.\n"
+"Es ist keine weitere MOK-Konfiguration erforderlich."
+
+msgid "Secure Boot Detected"
+msgstr "Secure Boot erkannt"
+
+msgid ""
+"Secure Boot is enabled on this system.\n"
+"NVIDIA drivers must be signed to load.\n"
+"\n"
+"Do you want to configure Machine Owner Key (MOK) now?"
+msgstr ""
+"Secure Boot ist auf diesem System aktiviert.\n"
+"NVIDIA-Treiber müssen signiert sein, um geladen zu werden.\n"
+"\n"
+"Möchten Sie den Machine Owner Key (MOK) jetzt konfigurieren?"
+
+msgid "Configure MOK"
+msgstr "MOK konfigurieren"
+
+msgid "Skip (Install anyway)"
+msgstr "Überspringen (Trotzdem installieren)"
+
+msgid "Set MOK Password"
+msgstr "MOK-Passwort festlegen"
+
+msgid ""
+"Please enter a password for the Machine Owner Key (MOK).\n"
+"You will need to enter this password after reboot in the MOK management interface.\n"
+"Password:"
+msgstr ""
+"Bitte geben Sie ein Passwort für den Machine Owner Key (MOK) ein.\n"
+"Sie müssen dieses Passwort nach dem Neustart in der MOK-Verwaltungsoberfläche eingeben.\n"
+"Passwort:"
+
+msgid "Password Required"
+msgstr "Passwort erforderlich"
+
+msgid "MOK configuration cancelled. You can still install the driver, but it may not load with Secure Boot enabled."
+msgstr "MOK-Konfiguration abgebrochen. Sie können den Treiber weiterhin installieren, er wird jedoch möglicherweise nicht geladen, wenn Secure Boot aktiviert ist."
+
+msgid "Confirm MOK Password"
+msgstr "MOK-Passwort bestätigen"
+
+msgid "Please re-enter the password to confirm:"
+msgstr "Bitte geben Sie das Passwort zur Bestätigung erneut ein:"
+
+msgid "Password Mismatch"
+msgstr "Passwort stimmt nicht überein"
+
+msgid "Passwords do not match. MOK configuration cancelled."
+msgstr "Passwörter stimmen nicht überein. MOK-Konfiguration abgebrochen."
+
+msgid "Already Installed"
+msgstr "Bereits installiert"
+
+msgid ""
+"The driver version '%1' is already installed.\n"
+"No further action is required."
+msgstr ""
+"Die Treiber-Version '%1' ist bereits installiert.\n"
+"Es ist keine weitere Aktion erforderlich."
+
+msgid "Different Version Installed"
+msgstr "Andere Version installiert"
+
+msgid ""
+"You currently have '%1' installed.\n"
+"Installing '%2' will replace it (this will remove the old driver package).\n"
+"\n"
+"Are you sure you want to continue?"
+msgstr ""
+"Sie haben derzeit '%1' installiert.\n"
+"Die Installation von '%2' wird diese ersetzen (dadurch wird das alte Treiberpaket entfernt).\n"
+"\n"
+"Sind Sie sicher, dass Sie fortfahren möchten?"
+
+msgid "Secure Boot Ignored"
+msgstr "Secure Boot ignoriert"
+
+msgid ""
+"Secure Boot is enabled, but you chose not to configure MOK.\n"
+"The driver may fail to load after installation."
+msgstr ""
+"Secure Boot ist aktiviert, aber Sie haben sich entschieden, MOK nicht zu konfigurieren.\n"
+"Der Treiber wird nach der Installation möglicherweise nicht geladen."
+
+msgid "Confirm Installation"
+msgstr "Installation bestätigen"
+
+msgid ""
+"The system will install/switch to the following packages:\n"
+"%1\n"
+"\n"
+"This requires root privileges and may download packages. Continue?"
+msgstr ""
+"Das System wird die folgenden Pakete installieren/zu ihnen wechseln:\n"
+"%1\n"
+"\n"
+"Dies erfordert Root-Rechte und kann Pakete herunterladen. Fortfahren?"
+
+msgid "Driver Installation Log"
+msgstr "Treiber-Installationsprotokoll"
+
+msgid "\n--- Process finished with exit code %1 ---"
+msgstr "\n--- Prozess mit Exit-Code %1 abgeschlossen ---"
+
+msgid "The installation is complete. Please wait about 10 minutes, then restart your computer and enter the MOK password. Here's how: after restarting, when the blue screen appears, press any key within 10 seconds, then go through Enroll MOK, Continue, Yes, and then enter your MOK password. After that, select Reboot to restart your computer. Then, type `lsmod | grep nvidia` to check if NVIDIA has loaded successfully, and go to KDE System Settings > About This System to see if your NVIDIA GPU model is displayed. If the NVIDIA driver didn't load successfully, open the terminal, type sudo akmods --force, then sudo dracut -v --force, and restart your computer to complete the installation!"
+msgstr "Die Installation ist abgeschlossen. Bitte warten Sie etwa 10 Minuten, starten Sie dann Ihren Computer neu und geben Sie das MOK-Passwort ein. So gehen Sie vor: Wenn nach dem Neustart der blaue Bildschirm erscheint, drücken Sie innerhalb von 10 Sekunden eine beliebige Taste, navigieren Sie dann durch Enroll MOK, Continue, Yes, und geben Sie anschließend Ihr MOK-Passwort ein. Wählen Sie danach Reboot, um Ihren Computer neu zu starten. Geben Sie dann `lsmod | grep nvidia` ein, um zu überprüfen, ob NVIDIA erfolgreich geladen wurde, und öffnen Sie KDE-Systemeinstellungen > Über dieses System, um zu sehen, ob Ihr NVIDIA-GPU-Modell angezeigt wird. Wenn der NVIDIA-Treiber nicht erfolgreich geladen wurde, öffnen Sie das Terminal, geben Sie sudo akmods --force und anschließend sudo dracut -v --force ein, und starten Sie Ihren Computer neu, um die Installation abzuschließen!"
+
+msgid "The installation is complete. Please wait about 10 minutes, then restart your computer to start using it! If the NVIDIA driver didn't load successfully, open the terminal, type sudo akmods --force, then sudo dracut -v --force, and restart your computer to complete the installation!"
+msgstr "Die Installation ist abgeschlossen. Bitte warten Sie etwa 10 Minuten, starten Sie dann Ihren Computer neu, um ihn zu verwenden! Wenn der NVIDIA-Treiber nicht erfolgreich geladen wurde, öffnen Sie das Terminal, geben Sie sudo akmods --force und anschließend sudo dracut -v --force ein, und starten Sie Ihren Computer neu, um die Installation abzuschließen!"
+
+msgid "\n\nInstallation log saved to:\n%1"
+msgstr "\n\nInstallationsprotokoll gespeichert unter:\n%1"
+
+msgid "Success"
+msgstr "Erfolg"
+
+msgid "Error"
+msgstr "Fehler"
+
+msgid ""
+"Driver installation failed.\n"
+"Check the log for details:\n"
+"%1"
+msgstr ""
+"Treiber-Installation fehlgeschlagen.\n"
+"Überprüfen Sie das Protokoll für Details:\n"
+"%1"
+
+msgid "MOK Configuration Complete"
+msgstr "MOK-Konfiguration abgeschlossen"
+
+msgid ""
+"MOK key generation and certificate import have been completed.\n"
+"\n"
+"Please remember the MOK password you set earlier. After reboot, "
+"the MOK management interface (blue screen) will appear. You must "
+"enter this password to enroll the key:\n"
+"\n"
+"    %1\n"
+"\n"
+"Steps: Enroll MOK -> Continue -> Yes -> enter password -> Reboot."
+msgstr ""
+"Die MOK-Schlüsselgenerierung und der Zertifikatsimport wurden abgeschlossen.\n"
+"\n"
+"Bitte merken Sie sich das zuvor festgelegte MOK-Passwort. Nach dem Neustart erscheint "
+"die MOK-Verwaltungsoberfläche (blauer Bildschirm). Sie müssen dieses Passwort eingeben, "
+"um den Schlüssel zu registrieren:\n"
+"\n"
+"    %1\n"
+"\n"
+"Schritte: Enroll MOK -> Continue -> Yes -> Passwort eingeben -> Reboot."

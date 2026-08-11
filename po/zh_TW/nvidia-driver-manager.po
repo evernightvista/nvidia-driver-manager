@@ -1,0 +1,233 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: nvidia-driver-manager 2.0.0\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "NVIDIA Driver Manager"
+msgstr "NVIDIA 驅動程式管理員"
+
+msgid "Manage NVIDIA drivers on Fedora Linux"
+msgstr "在 Fedora Linux 上管理 NVIDIA 驅動程式"
+
+msgid "(C) 2027 KairikiFedora"
+msgstr "(C) 2027 KairikiFedora"
+
+msgid "Current driver: detecting..."
+msgstr "目前驅動程式：偵測中..."
+
+msgid "Select Driver Version"
+msgstr "選擇驅動程式版本"
+
+msgid "Configure MOK for Secure Boot (if enabled)"
+msgstr "為安全啟動設定 MOK（如已啟用）"
+
+msgid "Install / Switch Driver"
+msgstr "安裝/切換驅動程式"
+
+msgid "NVIDIA GPU detected"
+msgstr "已偵測到 NVIDIA GPU"
+
+msgid "This computer does not need additional NVIDIA drivers."
+msgstr "此電腦不需要額外的 NVIDIA 驅動程式。"
+
+msgid "Current driver: not installed"
+msgstr "目前驅動程式：未安裝"
+
+msgid "Current driver: %1"
+msgstr "目前驅動程式：%1"
+
+msgid "NVIDIA driver package '%1' is already installed. No action is needed unless you want to switch versions."
+msgstr "NVIDIA 驅動程式套件「%1」已安裝。除非您想切換版本，否則無需操作。"
+
+msgid "Display server: %1"
+msgstr "顯示伺服器：%1"
+
+msgid "MOK Configuration Log"
+msgstr "MOK 設定紀錄"
+
+msgid "Close"
+msgstr "關閉"
+
+msgid "Error: Cannot create temporary directory."
+msgstr "錯誤：無法建立暫存目錄。"
+
+msgid "Error: Cannot write temporary script."
+msgstr "錯誤：無法寫入暫存指令稿。"
+
+msgid "Failed to start pkexec."
+msgstr "啟動 pkexec 失敗。"
+
+msgid "\n--- MOK configuration finished with exit code %1 ---"
+msgstr "\n--- MOK 設定已完成，結束代碼為 %1 ---"
+
+msgid "MOK configuration completed successfully."
+msgstr "MOK 設定成功完成。"
+
+msgid "MOK configuration failed. Please check the log for details."
+msgstr "MOK 設定失敗。請查看紀錄以了解詳情。"
+
+msgid "MOK Already Configured"
+msgstr "MOK 已設定"
+
+msgid ""
+"The MOK certificate is already enrolled.\n"
+"No further MOK configuration is needed."
+msgstr ""
+"MOK 憑證已註冊。\n"
+"無需進一步設定 MOK。"
+
+msgid "Secure Boot Detected"
+msgstr "偵測到安全啟動"
+
+msgid ""
+"Secure Boot is enabled on this system.\n"
+"NVIDIA drivers must be signed to load.\n"
+"\n"
+"Do you want to configure Machine Owner Key (MOK) now?"
+msgstr ""
+"此系統已啟用安全啟動。\n"
+"NVIDIA 驅動程式必須經過簽署才能載入。\n"
+"\n"
+"您現在要設定 Machine Owner Key (MOK) 嗎？"
+
+msgid "Configure MOK"
+msgstr "設定 MOK"
+
+msgid "Skip (Install anyway)"
+msgstr "跳過（仍然安裝）"
+
+msgid "Set MOK Password"
+msgstr "設定 MOK 密碼"
+
+msgid ""
+"Please enter a password for the Machine Owner Key (MOK).\n"
+"You will need to enter this password after reboot in the MOK management interface.\n"
+"Password:"
+msgstr ""
+"請輸入 Machine Owner Key (MOK) 的密碼。\n"
+"重新開機後，您需要在 MOK 管理介面中輸入此密碼。\n"
+"密碼："
+
+msgid "Password Required"
+msgstr "需要密碼"
+
+msgid "MOK configuration cancelled. You can still install the driver, but it may not load with Secure Boot enabled."
+msgstr "MOK 設定已取消。您仍可以安裝驅動程式，但在啟用安全啟動的情況下可能無法載入。"
+
+msgid "Confirm MOK Password"
+msgstr "確認 MOK 密碼"
+
+msgid "Please re-enter the password to confirm:"
+msgstr "請再次輸入密碼以確認："
+
+msgid "Password Mismatch"
+msgstr "密碼不符"
+
+msgid "Passwords do not match. MOK configuration cancelled."
+msgstr "密碼不符。MOK 設定已取消。"
+
+msgid "Already Installed"
+msgstr "已安裝"
+
+msgid ""
+"The driver version '%1' is already installed.\n"
+"No further action is required."
+msgstr ""
+"驅動程式版本「%1」已安裝。\n"
+"無需進一步操作。"
+
+msgid "Different Version Installed"
+msgstr "已安裝其他版本"
+
+msgid ""
+"You currently have '%1' installed.\n"
+"Installing '%2' will replace it (this will remove the old driver package).\n"
+"\n"
+"Are you sure you want to continue?"
+msgstr ""
+"您目前已安裝「%1」。\n"
+"安裝「%2」將會取代它（這將移除舊的驅動程式套件）。\n"
+"\n"
+"您確定要繼續嗎？"
+
+msgid "Secure Boot Ignored"
+msgstr "安全啟動已忽略"
+
+msgid ""
+"Secure Boot is enabled, but you chose not to configure MOK.\n"
+"The driver may fail to load after installation."
+msgstr ""
+"安全啟動已啟用，但您選擇不設定 MOK。\n"
+"驅動程式在安裝後可能無法載入。"
+
+msgid "Confirm Installation"
+msgstr "確認安裝"
+
+msgid ""
+"The system will install/switch to the following packages:\n"
+"%1\n"
+"\n"
+"This requires root privileges and may download packages. Continue?"
+msgstr ""
+"系統將安裝/切換到以下套件：\n"
+"%1\n"
+"\n"
+"此操作需要 root 權限，並可能下載套件。是否繼續？"
+
+msgid "Driver Installation Log"
+msgstr "驅動程式安裝紀錄"
+
+msgid "\n--- Process finished with exit code %1 ---"
+msgstr "\n--- 處理程序已完成，結束代碼為 %1 ---"
+
+msgid "The installation is complete. Please wait about 10 minutes, then restart your computer and enter the MOK password. Here's how: after restarting, when the blue screen appears, press any key within 10 seconds, then go through Enroll MOK, Continue, Yes, and then enter your MOK password. After that, select Reboot to restart your computer. Then, type `lsmod | grep nvidia` to check if NVIDIA has loaded successfully, and go to KDE System Settings > About This System to see if your NVIDIA GPU model is displayed. If the NVIDIA driver didn't load successfully, open the terminal, type sudo akmods --force, then sudo dracut -v --force, and restart your computer to complete the installation!"
+msgstr "安裝已完成。請等待約 10 分鐘，然後重新開機並輸入 MOK 密碼。操作方法如下：重新開機後，當出現藍色畫面時，請在 10 秒內按任意鍵，然後依次選擇 Enroll MOK、Continue、Yes，並輸入您的 MOK 密碼。之後，選擇 Reboot 重新開機。然後，輸入 `lsmod | grep nvidia` 檢查 NVIDIA 是否成功載入，並前往 KDE 系統設定 > 關於此系統 查看是否顯示您的 NVIDIA GPU 型號。如果 NVIDIA 驅動程式未能成功載入，請開啟終端機，輸入 sudo akmods --force，然後輸入 sudo dracut -v --force，並重新開機以完成安裝！"
+
+msgid "The installation is complete. Please wait about 10 minutes, then restart your computer to start using it! If the NVIDIA driver didn't load successfully, open the terminal, type sudo akmods --force, then sudo dracut -v --force, and restart your computer to complete the installation!"
+msgstr "安裝已完成。請等待約 10 分鐘，然後重新開機即可開始使用！如果 NVIDIA 驅動程式未能成功載入，請開啟終端機，輸入 sudo akmods --force，然後輸入 sudo dracut -v --force，並重新開機以完成安裝！"
+
+msgid "\n\nInstallation log saved to:\n%1"
+msgstr "\n\n安裝紀錄已儲存到：\n%1"
+
+msgid "Success"
+msgstr "成功"
+
+msgid "Error"
+msgstr "錯誤"
+
+msgid ""
+"Driver installation failed.\n"
+"Check the log for details:\n"
+"%1"
+msgstr ""
+"驅動程式安裝失敗。\n"
+"請查看紀錄以了解詳情：\n"
+"%1"
+
+msgid "MOK Configuration Complete"
+msgstr "MOK 設定完成"
+
+msgid ""
+"MOK key generation and certificate import have been completed.\n"
+"\n"
+"Please remember the MOK password you set earlier. After reboot, "
+"the MOK management interface (blue screen) will appear. You must "
+"enter this password to enroll the key:\n"
+"\n"
+"    %1\n"
+"\n"
+"Steps: Enroll MOK -> Continue -> Yes -> enter password -> Reboot."
+msgstr ""
+"MOK 金鑰產生和憑證匯入已完成。\n"
+"\n"
+"請記住您之前設定的 MOK 密碼。"
+"重新開機後，將出現 MOK 管理介面（藍色畫面）。"
+"您必須輸入此密碼以註冊金鑰：\n"
+"\n"
+"    %1\n"
+"\n"
+"步驟：註冊 MOK -> 繼續 -> 是 -> 輸入密碼 -> 重新開機。"

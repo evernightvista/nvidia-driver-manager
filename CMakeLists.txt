@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.16)
-project(NvidiaDriverManager VERSION 1.0.0 LANGUAGES CXX)
+project(NvidiaDriverManager VERSION 2.0.0 LANGUAGES CXX)
 
 set(TRANSLATION_DOMAIN "nvidia-driver-manager")
 
@@ -34,5 +34,7 @@ target_link_libraries(nvidia-driver-manager
 
 install(TARGETS nvidia-driver-manager RUNTIME DESTINATION ${KDE_INSTALL_BINDIR})
 install(FILES nvidia-driver-manager.desktop DESTINATION ${KDE_INSTALL_APPDIR})
+install(PROGRAMS nvidia-driver-manager-helper DESTINATION ${CMAKE_INSTALL_LIBEXECDIR})
+install(FILES org.fedoraproject.nvidia-driver-manager.policy DESTINATION ${KDE_INSTALL_DATADIR}/polkit-1/actions)
 
-add_subdirectory(po)
+ki18n_install(po)

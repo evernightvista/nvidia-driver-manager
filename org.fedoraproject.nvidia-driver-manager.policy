@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE policyconfig PUBLIC
+ "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN"
+ "http://www.freedesktop.org/standards/PolicyKit/1.0/policyconfig.dtd">
+
+<!--
+  NVIDIA Driver Manager - Polkit policy
+  Authentication is required before installing NVIDIA drivers
+  and/or configuring MOK for Secure Boot.
+-->
+
+<policyconfig>
+
+  <vendor>Evernight Vista Team</vendor>
+  <vendor_url>https://github.com/evernightvista/nvidia-driver-manager</vendor_url>
+
+  <action id="org.fedoraproject.nvidia-driver-manager.install">
+
+    <!-- Polkit 认证标题：安装nvidia驱动需要认证 -->
+    <description>安装nvidia驱动需要认证</description>
+    <message>安装nvidia驱动需要认证</message>
+
+    <description xml:lang="zh_CN">安装nvidia驱动需要认证</description>
+    <message xml:lang="zh_CN">安装nvidia驱动需要认证</message>
+
+    <description xml:lang="zh_TW">安裝nvidia驅動程式需要認證</description>
+    <message xml:lang="zh_TW">安裝nvidia驅動程式需要認證</message>
+
+    <description xml:lang="ja">NVIDIA ドライバーのインストール</description>
+    <message xml:lang="ja">NVIDIA ドライバーのインストールおよび/またはセキュアブート MOK の設定には認証が必要です</message>
+
+    <description xml:lang="de">NVIDIA-Treiber installieren</description>
+    <message xml:lang="de">Authentifizierung ist erforderlich, um NVIDIA-Treiber zu installieren und/oder MOK für Secure Boot zu konfigurieren</message>
+
+    <description xml:lang="ko">NVIDIA 드라이버 설치</description>
+    <message xml:lang="ko">NVIDIA 드라이버 설치 및/또는 보안 부팅 MOK 구성을 위해 인증이 필요합니다</message>
+
+    <description xml:lang="fr">Installer le pilote NVIDIA</description>
+    <message xml:lang="fr">Une authentification est requise pour installer les pilotes NVIDIA et/ou configurer MOK pour Secure Boot</message>
+
+    <defaults>
+      <allow_any>auth_admin</allow_any>
+      <allow_inactive>auth_admin</allow_inactive>
+      <allow_active>auth_admin_keep</allow_active>
+    </defaults>
+
+    <annotate key="org.freedesktop.policykit.exec.path">/usr/libexec/nvidia-driver-manager-helper</annotate>
+    <annotate key="org.freedesktop.policykit.exec.allow_gui">true</annotate>
+  </action>
+
+</policyconfig>
